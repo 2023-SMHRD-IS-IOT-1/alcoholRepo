@@ -47,11 +47,11 @@ function Calendar({ date }) {
 
         const stickers = [];
         if (sojuCount > 0 && beerCount > 0) {
-            stickers.push(<img src={somakSticker} alt="somak" className="somak" />);
+            stickers.push(<img src={somakSticker} alt="somakSticker" className="somakStickerDate" />);
         } else if (sojuCount > 0) {
-            stickers.push(<img src={sojuSticker} alt="soju" className="soju" />);
+            stickers.push(<img src={sojuSticker} alt="sojuSticker" className="sojuStickerDate" />);
         } else if (beerCount > 0) {
-            stickers.push(<img src={beerSticker} alt="beer" className="beer" />);
+            stickers.push(<img src={beerSticker} alt="beerSticker" className="beerStickerDate" />);
         }
 
         dates.push(

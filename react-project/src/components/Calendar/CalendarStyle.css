@@ -108,7 +108,7 @@ button {
 .date {
     background: #f4f4f4;
     padding: 10px;
-    padding-bottom: 40px;
+    height: 70px;
     cursor: pointer;
 }
 
@@ -119,6 +119,11 @@ button {
 
 .today {
     border: 3px solid rgba(101, 201, 92, 0.555) !important;
+}
+.somakStickerDate, .sojuStickerDate, .beerStickerDate  {
+    width: 50px; /* 원하는 크기로 조정 */
+    height: 50px; /* 원하는 크기로 조정 */
+    padding-left: 8px;
 }
 
 /* Modal */

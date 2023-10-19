@@ -1,0 +1,79 @@
+.modalIDform {
+    position: relative;
+    width: 30%;
+    margin: 0 auto;
+}
+
+/* 모달 스타일 */
+.modalID {
+    /* width: 100%; */
+    position: absolute;
+    width: 100%;
+    top: 50px;
+    height: 100px;
+    border-radius: 10px;
+    /* z-index: 1;
+    left: 20%;
+    top: 20%;
+    align-items: center;
+    justify-items: center;
+    height: 120px; */
+    background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+.modalID-content {
+    width: 97%;
+    height: 90%;
+    /* position: absolute; */
+    background-color: #feefef;
+    /* min-height: 90%; */
+    margin:4px auto 0;
+    border-radius: 10px;
+    /* padding: 1px; */
+    border: 1px solid #888;
+    /* width: 99%; */
+}
+
+.modalPWform {
+    position: relative;
+    width: 30%;
+    margin: 0 auto;
+}
+
+/* 모달 스타일 */
+.modalPW {
+    /* width: 100%; */
+    position: absolute;
+    width: 100%;
+    top: 50px;
+    height: 250px;
+    border-radius: 10px;
+    /* z-index: 1;
+    left: 20%;
+    top: 20%;
+    align-items: center;
+    justify-items: center;
+    height: 120px; */
+    background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+.modalPW-content {
+    width: 97%;
+    height: 96%;
+    /* position: absolute; */
+    background-color: #feefef;
+    /* min-height: 90%; */
+    margin:4px auto 0;
+    border-radius: 10px;
+    /* padding: 1px; */
+    border: 1px solid #888;
+    /* width: 99%; */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}

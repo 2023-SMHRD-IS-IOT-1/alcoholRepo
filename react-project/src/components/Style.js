@@ -10,6 +10,9 @@ export const StyledH1 = styled.h1`
   padding: 20px;
   text-align: center;
   margin-bottom: 50px;
+  border: none;
+  border-radius: 5px;
+  
 `;
 
 export const StyledForm = styled.form`
@@ -21,6 +24,17 @@ export const StyledForm = styled.form`
   background-color: #fff;
 `;
 
+export const StyledH3 = styled.h3`
+  color: #fff;
+  background-color: #27ae60;
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 5px;
+  border: none;
+  border-radius: 5px;
+  
+`;
+
 export const StyledLabel = styled.label`
   font-weight: bold;
   display: block;
@@ -28,7 +42,7 @@ export const StyledLabel = styled.label`
 `;
 
 export const StyledInput = styled.input`
-  width: 100%;
+  width: 90%;
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
@@ -36,7 +50,7 @@ export const StyledInput = styled.input`
 `;
 
 export const StyledButton = styled.button`
-  width: 100%;
+  width: 50%;
   padding: 10px;
   background-color: #27ae60;
   color: #fff;

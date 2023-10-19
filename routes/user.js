@@ -59,20 +59,21 @@ router.post('/checkemail', (req, res)=>{
     let email = req.body[0];
     let password = req.body[1];
   
-    let sql = "select u_email, u_nickname from users where u_email = ? and u_pw = ?"
+    let sql = "select * from users where u_email = ? and u_pw = ?"
   
     conn.query(sql, [email, password], (err, rows)=> {
       console.log('로그인 결과', rows)
       if (rows.length > 0) {
-        console.log('로그인 성공',rows[0].u_nickname)
-        req.session.user = [email = rows[0].u_email, nickname = rows[0].u_nickname]
-        console.log(req.session.user);
-        req.session.save(() => {
-            res.json({ exists: true});
-        })
+        console.log('로그인 성공')
+        res.json({data: rows})
+        // req.session.user = [email = rows[0].u_email, nickname = rows[0].u_nickname]
+        // console.log(req.session.user);
+        // req.session.save(() => {
+        //     res.json({ exists: true});
+        // })
       } else {
         console.log('로그인 실패')
-        res.json({ exists: false });
+        // res.json({ exists: false });
       }
     })
   })
@@ -115,7 +116,67 @@ router.post('/checkemail', (req, res)=>{
     });
   })
 
+  // ID 찾기
+  router.post('/FindID', (req, res)=>{
+    console.log('FindID', req.body);
+    let name = req.body[0];
+    let phoneNumber = req.body[1];
+    
+    let sql = "select u_email from users where u_name = ? and u_phone = ?"
+  
+    conn.query(sql, [name, phoneNumber], (err, rows)=> {
+      console.log('ID찾기 결과', rows)
+      if (rows) {
+        console.log('ID찾기 성공')
+        res.json({data : rows})
+      } else {
+        console.log('ID찾기 실패')
+      }
+    })
+  })
 
+  // PW 찾기
+  router.post('/FindPW', (req, res)=>{
+    console.log('FindPW', req.body);
+    let email = req.body[0];
+    let name = req.body[1];
+    let phoneNumber = req.body[2];
+    
+    
+    let sql = "select u_pw from users where u_email = ? and u_name = ? and u_phone = ?"
+  
+    conn.query(sql, [email, name, phoneNumber], (err, rows)=> {
+      console.log('PW찾기 결과', rows)
+      if (rows) {
+        console.log('pW찾기 성공')
+        res.json({data : rows})
+      } else {
+        console.log('PW찾기 실패')
+      }
+    })
+  })
+
+  // PW 변경
+  router.post('/ChangePW', (req, res)=>{
+    console.log('ChangePW', req.body);
+    let email = req.body[0];
+    let pw = req.body[1];
+    
+    
+    let sql = "update users set u_pw = ? where u_email = ?"
+  
+    conn.query(sql, [pw, email], (err, rows)=> {
+      console.log('PW변경 결과', rows)
+      if (rows) {
+        console.log('PW변경 성공')
+        res.json({ exists: true })
+      } else {
+        console.log('PW변경 실패')
+      }
+    })
+  })
+
+  // 유저 마신양 데이터
   router.get('/getA',(req, res) => {
     console.log("getA");
     let sql = "SELECT * FROM alcohol WHERE DATE(starttime) BETWEEN DATE_SUB(CURDATE(), INTERVAL 6 DAY) AND CURDATE();";

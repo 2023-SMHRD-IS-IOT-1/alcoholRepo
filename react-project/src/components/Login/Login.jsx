@@ -3,6 +3,7 @@ import './Login.css'
 import axios from '../../axios';
 import {Link} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { Userinfo } from '../../data/Data';
 // import KakaoLogin from '../components/01_KakaoLogin';
 // import NaverLogin from '../components/01_NaverLogin';
 // import '../styles/LoginForm.js';
@@ -50,11 +51,24 @@ const Login = (props) => {
   
       try {
         const response = await axios.post('/user/getLogin', [ email, password ]);
-  
-        if (response.data.exists) {
+        console.log(response.data);
+        if (response.data) {
           setMessage('로그인 성공!');
+          Userinfo.push({
+            u_email : response.data.data[0].u_email,
+            u_pw : response.data.data[0].u_pw,
+            u_name : response.data.data[0].u_name,
+            u_phone : response.data.data[0].u_phone,
+            u_birthyear : response.data.data[0].u_birthyear,
+            u_gender : response.data.data[0].u_gender,
+            u_nickname : response.data.data[0].u_nickname,
+            u_joindate : response.data.data[0].u_joindate
+          })
+          console.log("로그인 성공");
+          console.log("유저인포확인", Userinfo);
           navigate('/Main');
         } else {
+          console.log("로그인 실패");
           setMessage('로그인이 실패하였습니다.');
         }
       } catch (error) {

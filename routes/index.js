@@ -10,13 +10,13 @@ const conn = require("../config/database");
 router.get('/', (req, res)=>{
     console.log('main');
     // 5-2. 리액트 프로젝트 경로 설정
-    res.sendFile(path.join(__dirname, 'mainproject-react', 'build', 'index.html'))
+    res.sendFile(path.join(__dirname, 'react-project', 'build', 'index.html'))
     res.render("C_MyPage", {obj : req.session.user })
 })
 
 // 회원가입페이지 경로 설정
 router.get('/signup', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'mainproject-react', 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'react-project', 'build', 'index.html'));
 })
 
 

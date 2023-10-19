@@ -7,7 +7,7 @@
 }
 
 .animate {
-  left: -20%; /* 원하는 위치로 이동 */
+  left: 0; /* 원하는 위치로 이동 */
 }
 
 .image-containe>img  {

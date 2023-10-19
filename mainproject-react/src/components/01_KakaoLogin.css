@@ -1,0 +1,29 @@
+.kakao-login-button {
+    background-color: #FFEB00;
+    color: #381E1F;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    font-size: 15px;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;  /* 아이콘과 텍스트를 중앙에 배치 */ 
+}
+
+    /* width: '100%',
+        padding: '10px',
+        backgroundColor: '#27ae60',
+        color: '#fff',
+        border: 'none',
+        borderRadius: '5px',
+        cursor: 'pointer',
+        transition: 'background-color 0.2s' */
+
+    .kakao-icon {
+      width: 20px;  /* 로고의 크기를 조절하세요 */
+      height: 20px;
+      margin-right: 10px;  /* 로고와 텍스트 사이의 간격 */
+  }

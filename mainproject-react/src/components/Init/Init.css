@@ -1,0 +1,25 @@
+/* Init.css */
+
+.image-container {
+  position: relative;
+  left: 20%; /* 초기 위치 설정 */
+  transition: left 2s; /* left 속성을 2초 동안 변화시킴 */
+}
+
+.animate {
+  left: -20%; /* 원하는 위치로 이동 */
+}
+
+.image-containe>img  {
+    width: 1000px;
+}
+
+.move-message {
+  text-align: center; /* 가운데 정렬 설정 */
+  margin-right: 10px; /* 오른쪽으로 10px 이동, 필요에 따라 조절 가능 */
+}
+
+.initpage {
+    display: flex;
+    
+}

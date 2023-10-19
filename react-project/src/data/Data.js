@@ -31,7 +31,8 @@ export const SidebarData = [
     {
         icon: UilUsersAlt,
         heading: "Customers",
-    }
+    },
+    
 ]
 
 // 카드에 표시할 데이터

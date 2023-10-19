@@ -16,7 +16,7 @@ const GraphMount = () => {
 
     useEffect(() => {
         console.log('처음실행');
-        axios.get('/user/getA')
+        axios.get('/user/getAlcohol')
             .then(res => {
                 console.log("데이터오나?", res.data.data);
 

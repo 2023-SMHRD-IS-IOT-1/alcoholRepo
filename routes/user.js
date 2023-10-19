@@ -177,8 +177,8 @@ router.post('/checkemail', (req, res)=>{
   })
 
   // 유저 마신양 데이터
-  router.get('/getA',(req, res) => {
-    console.log("getA");
+  router.get('/getAlcohol',(req, res) => {
+    console.log("getAlcohol");
     let sql = "SELECT * FROM alcohol WHERE DATE(starttime) BETWEEN DATE_SUB(CURDATE(), INTERVAL 6 DAY) AND CURDATE();";
     conn.query(sql, (err, rows) => {
       console.log(rows);

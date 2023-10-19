@@ -30,12 +30,12 @@ a{
 
 /* Header */
 .header {
-    font-size: 25px;
+    font-size: 18px;
     padding-top: 30px;
+    padding-left: 80px;
 }
 
 /* Basic */
-
 body {
     /* font-family: 'SOYOMapleBoldTTF'; */
     font-family: Pretendard, sans-serif;
@@ -87,7 +87,7 @@ button {
     color: white;
     text-align: center;
     margin-bottom: 15px;
-    width: 90px;
+    /* width: 90px; */
 }
 
 .calendar-top:first-of-type{
@@ -124,39 +124,74 @@ button {
 /* Modal */
 .modal-overlay {
     position: fixed;
+    margin-left: 25% ;
+    margin-top: 15%;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 75%;
+    width: 50%;
+    height: 45%;
     background-color: rgba(252, 240, 240, 0.8);
     z-index: 9999;
     border-radius: 10px;
 }
+
 .modal {
-    margin: 5%;
+    margin: 3%;
     position: fixed;
     z-index: 10000;     /* 기존 100*/
     background-color: rgba(247, 197, 213, 0.8);
     border-radius: 10px;
-    width: 70%;
-    padding: 15px;
-    font-size: 20px;
-    
+    width: 30%;
+    height: max-content;
+    padding: 10px;
+    font-size: 15px;    
 }
+
 .modal-closed {
-    margin-left: 85%;
+    margin-left: 82%;
     margin-top: 8%;
+    padding: 10px;
+    text-align: center;      /* 수평 가운데 정렬 */
+    line-height: 0px;       /* 수직 가운데 정렬 */
+    height: 30px;
 }
 
 .modal-content {
-    margin-left: 5%;
-    margin-top: 3%;
-    position: fixed;
+    margin-left: 3%;
+    margin-top: 1%;;
+    /* position: fixed;  요소를 뷰포트에 고정시킴*/
+    margin: 3% auto; /* 수평 중앙 정렬을 위한 변경 */
+    display: flex; /* flexbox 적용 */
+    align-items: center; /* flexbox를 사용하여 수직 중앙 정렬 */
+    justify-content: space-between; /* 내부 요소들 간의 간격을 균등하게 */
     z-index: 10000;     /* 기존 100*/
     background-color: rgba(247, 197, 213, 0.801);
     border-radius: 10px;
-    width: 90%;
-    height: 190px;
+    width: 80%;
+    height: 80px;
+    padding: 10px;
+}
+.stickerBox {
+    background: #f4f4f4;
+    border-radius: 10px;
+    width: 30%;
+    height: 20px;
+}
+
+.stored-alcohol-info {
+    padding: 30px;
+}
+
+.stickerBox, .stored-alcohol-info {
+    display: inline-block;
+    margin: 0 10px;  /* 양쪽 간격을 10px로 설정. */
+    text-align: center;      /* 수평 가운데 정렬 */
+    height: 2cm;
+    font-size: 18px;
+}
+
+.stickerBox > img {
+    width: 75px;
 }
 
 .modal-add{
@@ -165,43 +200,47 @@ button {
 }
 
 .sojuSticker {
-    width: 50px; 
+    width: 50px;
     height: 50px;
-    background-color: #f4f4f4bd;
+    /* background-color: #f4f4f4bd; */
     /* margin-left: 36%;
     margin-top: 28%; */
 }
 .beerSticker {
     width: 50px;
     height: 50px;
-    background-color: #f4f4f4bd;
+    /* background-color: #f4f4f4bd; */
     /* margin-left: 7%; */
     
 }
 .modal-reset{
     /* margin-left: 10%;
-    width: 100px;
-    height: 50px;
+    /* width: 100px; */
+    /* height: 50px; */
     background-color: #f4f4f4bd;
-    padding: 20px; */
-    width: 100px;
-    height: 50px;
-    background-color: #f4f4f4bd;
-    padding: 20px;
+    /* padding: 10px; */
     text-align: center;      /* 수평 가운데 정렬 */
     line-height: 0px;       /* 수직 가운데 정렬 */
 }
 
 /* 버튼들을 나란히 배치 */
-.sojuSticker, .beerSticker, .modal-reset {
+.sojuSticker, .beerSticker, .modal-reset, .alcoholGlass {
     display: inline-block;
     margin: 0 10px;  /* 양쪽 간격을 10px로 설정. */
     vertical-align: middle;  /* 버튼들이 수직으로 가운데 정렬되도록 합니다. */
+    background: #444;
+    color: white;
+    height: 30px;
+    padding: 10px;
+    text-align: center;      /* 수평 가운데 정렬 */
+    line-height: 0px;       /* 수직 가운데 정렬 */
+    font-size: 15px;
+    
 }
 
 .buttonAll {
     position: sticky;  /* 위치를 고정 */
-    top: 75%;         /* 상단에서부터의 간격 */
+    top: 44%;         /* 상단에서부터의 간격 */
     text-align: center; /* 버튼들을 가운데 정렬 */
 }
 

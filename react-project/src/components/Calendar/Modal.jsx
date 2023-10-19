@@ -4,6 +4,8 @@ import './CalendarStyle.css';
 import './Calendar';
 import sojuSticker from '../../data/soju_cham.png';
 import beerSticker from '../../data/beer.png';
+import somakSticker from '../../data/somak.png'; 
+
 
 
 function Modal({ isOpen, onClose, selectedDate, alcoholData, setAlcoholData}) {
@@ -16,11 +18,17 @@ function Modal({ isOpen, onClose, selectedDate, alcoholData, setAlcoholData}) {
         }
         // 해당 날짜의 기존 데이터를 가져옵니다.
         const currentDateData = alcoholData[selectedDate] || {};
+        const currentCount = currentDateData[stickerType] || 0; 
 
         // 해당 날짜의 데이터에 새로운 스티커를 추가합니다.
+        // const updatedDateData = {
+        //     ...currentDateData,
+        //     stickers: [...(currentDateData.stickers || []), stickerType]
+        // };
+
         const updatedDateData = {
             ...currentDateData,
-            stickers: [...(currentDateData.stickers || []), stickerType]
+            [stickerType]: currentCount + 1
         };
     
         // 전체 알코올 데이터를 업데이트합니다.
@@ -53,7 +61,11 @@ function Modal({ isOpen, onClose, selectedDate, alcoholData, setAlcoholData}) {
 
     if (!isOpen) return null;
 
-    const currentStickers = alcoholData[selectedDate]?.stickers || [];
+    // const currentStickers = alcoholData[selectedDate]?.stickers || [];
+    const currentCounts = alcoholData && alcoholData[selectedDate] ? alcoholData[selectedDate] : {};
+    const sojuCount = currentCounts.soju || 0;
+    const beerCount = currentCounts.beer || 0;
+    
 
     return (
         <div className="modal-overlay">
@@ -62,32 +74,35 @@ function Modal({ isOpen, onClose, selectedDate, alcoholData, setAlcoholData}) {
             </div>
                 <button className='modal-closed' onClick={onClose}>X</button>
                 <br />
-                <br />
                 <div className="modal-content">
-                    <div className="stored-alcohol-info">
-                        <h4>음주량 기록</h4>
+                    <div className='stickerBox'>
+                    {sojuCount > 0 && beerCount > 0 && (
+                    <img src={somakSticker} alt="somak" className="somak" />
+                    )}
+                    {sojuCount > 0 && beerCount === 0 && (
+                        <img src={sojuSticker} alt="soju" className="soju" />
+                    )}
+                    {beerCount > 0 && sojuCount === 0 && (
+                        <img src={beerSticker} alt="beer" className="beer" />
+                    )}
+                    </div>
                         
-                        {currentStickers.map((sticker, idx) => (
-                        <img 
-                            key={idx} 
-                            src={sticker === "soju" ? sojuSticker : beerSticker} 
-                            alt={sticker}
-                            className={sticker}
-                        />
-                        ))}
+                    <div className="stored-alcohol-info"> 
+                        <h4>음주량 기록</h4>
+                        <p>소주: {sojuCount} 병</p>
+                        <p>맥주: {beerCount} 병</p>
                     </div>                 
                 </div>
                 <div className='buttonAll'>
                     <button className='sojuSticker' onClick={() => handleAddAlcohol('soju')}>
-                        <img src={sojuSticker} alt='soju'></img>
+                        소주
                     </button>
                     <button className='beerSticker' onClick={() => handleAddAlcohol('beer')}>
-                        <img src={beerSticker} alt='beer'></img>
+                        맥주
                     </button>
                     <button className='modal-reset' onClick={handleResetCounts}>초기화</button>
                 </div>
-            <div>
-                
+            <div>                
             </div>
         </div>
     );

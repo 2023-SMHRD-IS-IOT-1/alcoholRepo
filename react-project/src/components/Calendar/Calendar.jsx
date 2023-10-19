@@ -3,6 +3,10 @@
 import React, { useState } from 'react';
 import './CalendarStyle.css';
 import Modal from './Modal';
+import sojuSticker from '../../data/soju_cham.png';
+import beerSticker from '../../data/beer.png';
+import somakSticker from '../../data/somak.png'; 
+
 
 function Calendar({ date }) {
     // ,  alcoholData, setAlcoholData
@@ -11,8 +15,6 @@ function Calendar({ date }) {
     const m = date.getMonth() + 1;
     // month는 0부터 시작하므로 +1 필요
     const [alcoholData, setAlcoholData] = useState({});
-
-
 
     function getFirstDay(y, m) {
         const firstDay = new Date(y, m - 1, 1);
@@ -23,7 +25,6 @@ function Calendar({ date }) {
         const lastDay = new Date(y, m, 0);
         return lastDay.getDate();
     }
-
 
     const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THR', 'FRI', 'SAT'];
 
@@ -36,13 +37,28 @@ function Calendar({ date }) {
         const isToday = i === today.getDate() && m === today.getMonth() + 1 && y === today.getFullYear();
 
         const dateKey = formatDate(new Date(y, m - 1, i)); 
+        // const hasData = alcoholData[dateKey] && alcoholData[dateKey].sticker; 
         const hasData = alcoholData[dateKey] && alcoholData[dateKey].stickers && alcoholData[dateKey].stickers.length > 0; 
+
+        // 날짜를 생성할 때 스티커를 표사하는 로직을 추가해야함!!!!!!!
+        const currentData = alcoholData[dateKey] || {};
+        const sojuCount = currentData.soju || 0;
+        const beerCount = currentData.beer || 0;
+
+        const stickers = [];
+        if (sojuCount > 0 && beerCount > 0) {
+            stickers.push(<img src={somakSticker} alt="somak" className="somak" />);
+        } else if (sojuCount > 0) {
+            stickers.push(<img src={sojuSticker} alt="soju" className="soju" />);
+        } else if (beerCount > 0) {
+            stickers.push(<img src={beerSticker} alt="beer" className="beer" />);
+        }
 
         dates.push(
             <div key={i} className={`date ${isHidden ? "hidden-date" : ""} ${isToday ? "today" : ""} ${hasData ? 'has-data' : ''}`}>
-            <p>{i}</p>
+                <p>{i}</p>
+                {stickers}
             </div>
-
         );
     }
     
@@ -54,10 +70,7 @@ function Calendar({ date }) {
         // .padStart 메서드 : 한자리인 경우 앞에 0을 붙여 2자리 수로 만듦. .padStart(2, '0');
         return `${year}-${month}-${day}`;
     }
-    
-  
-    // 
-    
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedDate, setSelectedDate] = useState(null);
 

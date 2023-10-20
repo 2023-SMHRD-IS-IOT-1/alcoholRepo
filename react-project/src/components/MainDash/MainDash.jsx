@@ -10,7 +10,6 @@ const MainDash = () => {
     <div className='MainDash'>
         <h1>나의 음주 관리</h1>
         <img src={sojumain} alt="" />
-        <Cards />
         <Table />
     </div>
   )

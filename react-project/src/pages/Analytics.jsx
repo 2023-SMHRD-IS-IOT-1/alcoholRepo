@@ -1,9 +1,10 @@
 import React from 'react'
-import { GraphMount } from '../components'
+import { Cards, GraphMount } from '../components'
 
 const Analytics = () => {
   return (
     <div>
+      <Cards />
       <GraphMount />
     </div>
   )

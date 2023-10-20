@@ -2,63 +2,98 @@ import React from 'react'
 import { useState } from 'react'
 import './Card.css'
 
-import { motion,  AnimateSharedLayout } from 'framer-motion'
+import { motion, AnimateSharedLayout } from 'framer-motion'
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+
+import { CardsData } from '../../data/Data';
 
 // 그래프 도구
 import Chart from 'react-apexcharts'
 
-import {UilTimes} from '@iconscout/react-unicons'
+import { UilTimes } from '@iconscout/react-unicons'
 
 const Card = (props) => {
     const [expanded, setExpanded] = useState(false)
-  return (
-    <AnimateSharedLayout>
-        {
-            expanded? 
-                <ExpandedCard param={props} setExpanded={()=>setExpanded(false)} />:
-                <CompactCard param = {props} setExpanded={()=>setExpanded(true)} />
-            
-        }
-    </AnimateSharedLayout>
-  )
+    return (
+        <AnimateSharedLayout>
+            {
+                expanded ?
+                    <ExpandedCard param={props} setExpanded={() => setExpanded(false)} /> :
+                    <CompactCard param={props} setExpanded={() => setExpanded(true)} />
+
+            }
+        </AnimateSharedLayout>
+    )
 }
 
 // CompactCard
-function CompactCard ({param, setExpanded}){
+function CompactCard({ param, setExpanded }) {
     const Png = param.png;
-    return(
+    return (
         <motion.div
-        className="CompactCard"
-        style={{
-            background : param.color.backGround,
-            boxShadow : param.color.boxShadow
-        }}
-        onClick={setExpanded}
-        layoutId='expandableCard'
+            className="CompactCard"
+            style={{
+                background: param.color.backGround,
+                boxShadow: param.color.boxShadow
+            }}
+            onClick={setExpanded}
+            layoutId='expandableCard'
         >
             <div className="radialBar">
                 <CircularProgressbar
-                value={param.barValue}
-                text={`${param.barValue}%`}
+                    value={param.barValue}
+                    text={`${param.barValue}%`}
                 />
                 <span>{param.title}</span>
             </div>
             <div className="detail">
-            <Png />
-            <span>{param.value}</span>
-            <span>Last 24 hours</span>
+                <Png />
+                <span>{param.value}</span>
+                <span>Last 24 hours</span>
             </div>
         </motion.div>
     )
 }
 
+
+// 1. 정보를 받아오고 
+// 2. 배열에 push 
+// data.option.xaxis.categories.push()
+
+// ==============
+// 검색 ... <- 스프레드 문법 
+// 내가 바꿀거 빼고 나머지는 그대로 둘게 
+
+// data 
+// a : 20 
+// b : 10 
+
+// ...data, a = 10 
+// ==> a:10 b : 10 
+
+
+
+function generateDateRange(days) {
+    const dateRange = [];
+    const today = new Date();
+
+    for (let i = days; i >= 0; i--) {
+        const date = new Date(today);
+        date.setDate(today.getDate() - i);
+        dateRange.push(date.toISOString().split('T')[0]);
+    }
+
+    return dateRange;
+}
+
+
+// 23, 10, 11 <- 23-10-11 
 // ExpandedCard
-function ExpandedCard({param, setExpanded}){
+function ExpandedCard({ param, setExpanded }) {
 
     const data = {
-        options : {
+        options: {
             chart: {
                 type: "area",
                 height: "auto",
@@ -94,33 +129,29 @@ function ExpandedCard({param, setExpanded}){
             xaxis: {
                 type: "datetime",
                 categories: [
-                    "2023-10-15T00:00:00.000Z",
-                    "2023-10-15T01:00:00.000Z",
-                    "2023-10-15T02:00:00.000Z",
-                    "2023-10-15T03:00:00.000Z",
-                    "2023-10-15T04:00:00.000Z",
-                    "2023-10-15T05:00:00.000Z",
-                    "2023-10-15T06:00:00.000Z",
+                    generateDateRange(30),
                 ]
             }
         },
 
     }
-    return(
-        <motion.div 
-        className="ExpandedCard"
-        style={{
-            background: param.color.backGround,
-            boxShadow: param.color.boxShadow,
-        }}
-        layoutId='expandableCard'
+
+    
+    return (
+        <motion.div
+            className="ExpandedCard"
+            style={{
+                background: param.color.backGround,
+                boxShadow: param.color.boxShadow,
+            }}
+            layoutId='expandableCard'
         >
-            <div style={{alignSelf: 'flex-end', cursor: 'pointer', color: 'white'}}>
+            <div style={{ alignSelf: 'flex-end', cursor: 'pointer', color: 'white' }}>
                 <UilTimes onClick={setExpanded} />
             </div>
             <span>{param.title}</span>
             <div className="chartContainer">
-                <Chart series={param.series} type='area' options={data.options}/>
+                <Chart series={param.series} type='area' options={data.options} />
             </div>
             <span>Last 24 hours</span>
         </motion.div>

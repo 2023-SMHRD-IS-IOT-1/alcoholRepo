@@ -91,7 +91,6 @@ function generateDateRange(days) {
 // 23, 10, 11 <- 23-10-11 
 // ExpandedCard
 function ExpandedCard({ param, setExpanded }) {
-
     const data = {
         options: {
             chart: {
@@ -128,15 +127,13 @@ function ExpandedCard({ param, setExpanded }) {
             },
             xaxis: {
                 type: "datetime",
-                categories: [
-                    generateDateRange(30),
-                ]
+                categories: generateDateRange(29)
             }
         },
 
     }
 
-    
+
     return (
         <motion.div
             className="ExpandedCard"

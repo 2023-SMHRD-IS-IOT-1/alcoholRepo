@@ -11,8 +11,6 @@ import {
     UilClock,
 } from "@iconscout/react-unicons";
 
-export const Userinfo = [
-]
 
 // Sidebar Data
 export const SidebarData = [
@@ -35,10 +33,16 @@ export const SidebarData = [
     
 ]
 
+export const Userinfo = [
+]
+
+export const UserData = [
+];
+
 // 카드에 표시할 데이터
 export const CardsData = [
     {
-        title : "음주시간",
+        title : "음주량",
         color : {
             backGround: "linear-gradient(180deg, #bb67ff 0%, #c484f3 100%)",
             boxShadow: "0px 10px 20px 0px #e0c6f5",
@@ -48,13 +52,13 @@ export const CardsData = [
         png: UilClock,
         series: [
             {
-                name: "음주시간",
+                name: "음주량",
                 data:[31, 40, 28, 51, 42, 109, 100, 200, 30, 50],
             },
         ],
     },
     {
-        title : "음주량",
+        title : "음주시간",
         color : {
             backGround: "linear-gradient(180deg, #FF919D 0%, #Fc929D 100%)",
             boxShadow: "0px 10px 20px 0px #FDC0C7",
@@ -64,28 +68,25 @@ export const CardsData = [
         png: UilClock,
         series: [
             {
-                name: "음주량",
+                name: "음주시간",
                 data:[10, 100, 50, 70, 80, 30, 40],
             },
         ],
     },
-    // {
-    //     title : "뭐하지",
-    //     color : {
-    //         backGround: "linear-gradient(rgb(248, 212, 154) -146.42%, rgb(255 202 113) -46.42%)",
-    //         boxShadow: "0px 10px 20px 0px #F9D59B",
-    //     },
-    //     barValue: 60,
-    //     value: "4,270",
-    //     png: UilClock,
-    //     series: [
-    //         {
-    //             name: "뭐하지",
-    //             data:[31, 40, 28, 51, 42, 109, 100],
-    //         },
-    //     ],
-    // },
+    {
+        title : "음주속도",
+        color : {
+            backGround: "linear-gradient(rgb(248, 212, 154) -146.42%, rgb(255 202 113) -46.42%)",
+            boxShadow: "0px 10px 20px 0px #F9D59B",
+        },
+        barValue: 60,
+        value: "4,270",
+        png: UilClock,
+        series: [
+            {
+                name: "음주속도",
+                data:[31, 40, 28, 51, 42, 109, 100],
+            },
+        ],
+    },
 ]
-
-
-export const CardsData1 = [];

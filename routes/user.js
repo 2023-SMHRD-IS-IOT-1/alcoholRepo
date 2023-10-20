@@ -60,20 +60,24 @@ router.post('/getLogin', (req, res) => {
   let password = req.body[1];
 
   let sql = "select * from users where u_email = ? and u_pw = ?"
+  let sql2 = "insert into session values ( ? );"
 
   conn.query(sql, [email, password], (err, rows) => {
     console.log('로그인 결과', rows)
     if (rows.length > 0) {
-      console.log('로그인 성공')
-      res.json({ data: rows })
+      console.log('로그인 성공');
       // req.session.user = [email = rows[0].u_email, nickname = rows[0].u_nickname]
       // console.log(req.session.user);
       // req.session.save(() => {
       //     res.json({ exists: true});
       // })
+      conn.query(sql2, [email], (err, rows) => {
+        console.log('DB저장 성공')
+      })
+      res.json({ data : rows });
     } else {
       console.log('로그인 실패')
-      // res.json({ exists: false });
+      res.json({ data : rows });
     }
   })
 })
@@ -179,6 +183,40 @@ router.post('/ChangePW', (req, res) => {
 // 유저 마신양 데이터
 router.get('/getAlcohol', (req, res) => {
   console.log("getAlcohol");
+  let sql = "SELECT * FROM alcohol WHERE DATE(start_time) BETWEEN DATE_SUB(CURDATE(), INTERVAL 29 DAY) AND CURDATE()";
+
+  conn.query(sql, (err, rows) => {
+    console.log("데이터 수신 결과", rows);
+    if (rows) {
+      console.log('데이터 수신 성공');
+      res.json({ data: rows });
+    } else {
+      console.log('데이터 수신 실패');
+    }
+
+  })
+})
+
+// 유저 마신시간 데이터
+router.get('/getAlcoholTime', (req, res) => {
+  console.log("getAlcoholTime");
+  let sql = "SELECT * FROM alcohol WHERE DATE(start_time) BETWEEN DATE_SUB(CURDATE(), INTERVAL 29 DAY) AND CURDATE()";
+
+  conn.query(sql, (err, rows) => {
+    console.log("데이터 수신 결과", rows);
+    if (rows) {
+      console.log('데이터 수신 성공');
+      res.json({ data: rows });
+    } else {
+      console.log('데이터 수신 실패');
+    }
+
+  })
+})
+
+// 유저 마신속도 데이터
+router.get('/getAlcoholSpeed', (req, res) => {
+  console.log("getAlcoholSpeed");
   let sql = "SELECT * FROM alcohol WHERE DATE(start_time) BETWEEN DATE_SUB(CURDATE(), INTERVAL 29 DAY) AND CURDATE()";
 
   conn.query(sql, (err, rows) => {

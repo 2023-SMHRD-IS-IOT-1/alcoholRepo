@@ -1,10 +1,13 @@
 .Cards{
     display: flex;
+    /* flex-direction: column; */
     gap: 10px;
+    /* height: 800px; */
 }
 
 .parentContainer{
-    width: 100%;
+    width: 300px;
+    height: 90%;
 }
 
 @media screen and (max-width: 1200px) {
@@ -12,9 +15,9 @@
     .Cards{
         flex-direction: column;
     }
-    .parentContainer{
+    /* .parentContainer{
         height: 9rem;
-    }
+    } */
     
 }
 

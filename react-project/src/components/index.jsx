@@ -15,3 +15,4 @@ export { default as MyInfo } from './MyInfo/MyInfo';
 export { default as CalendarApp } from './Calendar/CalendarApp';
 export { default as GraphMount } from './Graph/GraphMount';
 export { default as GraphTime } from './Graph/GraphTime';
+export { default as DataCheck } from './DataCheck/DataCheck';

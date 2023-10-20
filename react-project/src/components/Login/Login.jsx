@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Login.css'
 import axios from '../../axios';
-import {Link} from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Userinfo } from '../../data/Data';
 // import KakaoLogin from '../components/01_KakaoLogin';
 // import NaverLogin from '../components/01_NaverLogin';
@@ -50,10 +49,11 @@ const Login = (props) => {
   
   
       try {
-        const response = await axios.post('/user/getLogin', [ email, password ]);
-        console.log(response.data);
-        if (response.data) {
+        const response = await axios.post('/user/getLogin', [ email, password]);
+        console.log(response.data.data);
+        if (response.data.data.length) {
           setMessage('로그인 성공!');
+          console.log("로그인 성공");
           Userinfo.push({
             u_email : response.data.data[0].u_email,
             u_pw : response.data.data[0].u_pw,
@@ -63,8 +63,7 @@ const Login = (props) => {
             u_gender : response.data.data[0].u_gender,
             u_nickname : response.data.data[0].u_nickname,
             u_joindate : response.data.data[0].u_joindate
-          })
-          console.log("로그인 성공");
+          });
           console.log("유저인포확인", Userinfo);
           navigate('/Main');
         } else {

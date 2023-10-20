@@ -180,43 +180,9 @@ router.post('/ChangePW', (req, res) => {
   })
 })
 
-// 유저 마신양 데이터
-router.get('/getAlcohol', (req, res) => {
-  console.log("getAlcohol");
-  let sql = "SELECT * FROM alcohol WHERE DATE(start_time) BETWEEN DATE_SUB(CURDATE(), INTERVAL 29 DAY) AND CURDATE()";
-
-  conn.query(sql, (err, rows) => {
-    console.log("데이터 수신 결과", rows);
-    if (rows) {
-      console.log('데이터 수신 성공');
-      res.json({ data: rows });
-    } else {
-      console.log('데이터 수신 실패');
-    }
-
-  })
-})
-
-// 유저 마신시간 데이터
-router.get('/getAlcoholTime', (req, res) => {
-  console.log("getAlcoholTime");
-  let sql = "SELECT * FROM alcohol WHERE DATE(start_time) BETWEEN DATE_SUB(CURDATE(), INTERVAL 29 DAY) AND CURDATE()";
-
-  conn.query(sql, (err, rows) => {
-    console.log("데이터 수신 결과", rows);
-    if (rows) {
-      console.log('데이터 수신 성공');
-      res.json({ data: rows });
-    } else {
-      console.log('데이터 수신 실패');
-    }
-
-  })
-})
-
-// 유저 마신속도 데이터
-router.get('/getAlcoholSpeed', (req, res) => {
-  console.log("getAlcoholSpeed");
+// 유저 알코올 데이터
+router.get('/getAlcoholData', (req, res) => {
+  console.log("getAlcoholData");
   let sql = "SELECT * FROM alcohol WHERE DATE(start_time) BETWEEN DATE_SUB(CURDATE(), INTERVAL 29 DAY) AND CURDATE()";
 
   conn.query(sql, (err, rows) => {

@@ -41,7 +41,7 @@ export const UserData = [
 
 // 카드에 표시할 데이터
 export const CardsData = [
-    {
+/*     {
         title : "음주량",
         color : {
             backGround: "linear-gradient(180deg, #bb67ff 0%, #c484f3 100%)",
@@ -88,5 +88,5 @@ export const CardsData = [
                 data:[31, 40, 28, 51, 42, 109, 100],
             },
         ],
-    },
+    }, */
 ]

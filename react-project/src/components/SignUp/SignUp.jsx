@@ -18,6 +18,7 @@ const SignUp = () => {
   const [birthYear, setBirthYear] = useState('선택');
   const [gender, setGender] = useState('선택');
   const [nickname, setNickname] = useState('');
+  const [goal, setGoal] = useState('');
   const navigate = useNavigate();
 
   // email 유효성 확인
@@ -58,64 +59,15 @@ const SignUp = () => {
 
 
 
-  // const [joinDate, setJoinDate] = useState('');
-  // const [duplicateEmail, setDuplicateEmail] = useState(false);
-  // const [duplicateMessage, setDuplicateMessage] = useState('');
-  // const handleCheckDuplicate = () => {
-  //   if(email) {
-  //     axios.post('http://localhost:5000/checkEmail', { email: email })
-  //       .then(response => {
-  //         if(response.data.exists) {
-  //           setDuplicateEmail(true);
-  //           setDuplicateMessage('중복된 email이 있습니다.');
-  //         } else {
-  //           setDuplicateEmail(false);
-  //           setDuplicateMessage('사용 가능한 email입니다.');
-  //         }
-  //       })
-  //       .catch(error => {
-  //         console.error('Error checking duplicate email:', error);
-  //       });
-  //   } else {
-  //     setDuplicateMessage('이메일을 입력해주세요.');
-  //   }
-  // };
-
-
-
   /* handleSignup 함수는 회원가입 양식이 제출될 때 실행됩니다.
   사용자 정보를 한 객체로 묶은 후, axios.post를 사용하여 백엔드 서버에 전송합니다.
   서버의 응답을 기반으로 회원가입이 성공했는지 실패했는지를 결정하고 콘솔에 로그를 출력합니다.*/
 
   const handleSignup = async (e) => {
     e.preventDefault();
-
     console.log('User Info:', password);
-    // axios를 통한 데이터 전송
-    // axios
-    // .post('/getData', [email, password, confirmPassword, name, phoneNumber, birthYear, gender, nickname])
-    // .then(res => console.log(res.data))
-
-
-    // axios- async랑 await 이용
-    /*
-    try {
-      // '/getData'자리에는 실제 백엔드 API 엔드포인트 URL로 변경해야돼!!!!!!!!!!!!!!!!!
-      const response = await axios.post('/getData', [email, password, confirmPassword, name, phoneNumber, birthYear, gender, nickname]);
- 
-  
-      if(response.data.success) { 
-          console.log('회원가입 성공:', response.data);
-          // 회원가입 후 추가적인 로직 (예: 홈페이지로 리다이렉트) 구현
-          navigate('/');
-      } else {
-          console.error('회원가입 실패:', response.data.message);
-      }
-      } catch (error) {
-          console.error('Error while signing up:', error);
-    } 
-    */
-    axios.post('/user/getData', [email, password, confirmPassword, name, phoneNumber, birthYear, gender, nickname])
+    
+    axios.post('/user/getData', [email, password, confirmPassword, name, phoneNumber, birthYear, gender, nickname, goal])
       .then(res => {
         console.log('백엔드에서 넘어온 데이터', res.data)
         navigate('/Login');
@@ -128,7 +80,7 @@ const SignUp = () => {
       <StyledH1>회원가입 페이지</StyledH1>
       <StyledForm onSubmit={handleSignup}>
         <StyledDiv>
-          <StyledLabel>Email: </StyledLabel>
+          <StyledLabel>Email :  </StyledLabel>
           <StyledInput
             type="email"
             value={email}
@@ -146,7 +98,7 @@ const SignUp = () => {
         </StyledDiv>
 
         <StyledDiv>
-          <StyledLabel>Password: </StyledLabel>
+          <StyledLabel>Password :  </StyledLabel>
           <StyledInput
             type="password"
             value={password}
@@ -156,7 +108,7 @@ const SignUp = () => {
         </StyledDiv>
 
         <StyledDiv>
-          <StyledLabel>Confirm Password: </StyledLabel>
+          <StyledLabel>Confirm Password :  </StyledLabel>
           <StyledInput
             type="password"
             value={confirmPassword}
@@ -172,42 +124,13 @@ const SignUp = () => {
         </StyledDiv>
 
         <StyledDiv>
-          <StyledLabel>Name: </StyledLabel>
+          <StyledLabel>Name :  </StyledLabel>
           <StyledInput
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder='홍길동'
           />
-        </StyledDiv>
-
-        <StyledDiv>
-          <StyledLabel>Phone Number: </StyledLabel>
-          <StyledInput
-            type="number"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            placeholder='01012341234'
-          />
-        </StyledDiv>
-
-        <StyledDiv>
-          <StyledLabel>Birth Year: </StyledLabel>
-          <select value={birthYear} onChange={(e) => setBirthYear(e.target.value)}>
-            <option value="선택" disabled>선택</option> {/* disabled 속성은 이 옵션을 선택할 수 없도록 합니다. */}
-            {Array.from({ length: 124 }, (_, i) => 2023 - i).map(year => (
-              <option key={year} value={year}>{year}</option>
-            ))}
-          </select>
-        </StyledDiv>
-
-        <StyledDiv>
-          <StyledLabel>Gender: </StyledLabel>
-          <select value={gender} onChange={(e) => setGender(e.target.value)}>
-            <option value="선택" disabled>선택</option> {/* disabled 속성은 이 옵션을 선택할 수 없도록 합니다. */}
-            <option value="남">남</option>
-            <option value="여">여</option>
-          </select>
         </StyledDiv>
 
         <StyledDiv>
@@ -220,10 +143,52 @@ const SignUp = () => {
           />
         </StyledDiv>
 
+        <StyledDiv>
+          <StyledLabel>Phone Number :  </StyledLabel>
+          <StyledInput
+            type="number"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            placeholder='01012341234'
+          />
+        </StyledDiv>
+
+        <StyledDiv>
+          <StyledLabel>Birth Year :  </StyledLabel>
+          <select className='signupBirthyear' value={birthYear} onChange={(e) => setBirthYear(e.target.value)}>
+            <option value="선택" disabled>선택</option> {/* disabled 속성은 이 옵션을 선택할 수 없도록 합니다. */}
+            {Array.from({ length: 124 }, (_, i) => 2023 - i).map(year => (
+              <option key={year} value={year}>{year}</option>
+            ))}
+          </select>
+        </StyledDiv>
+
+        <StyledDiv>
+          <StyledLabel>Gender :  </StyledLabel>
+          <select className='signupGender' value={gender} onChange={(e) => setGender(e.target.value)}>
+            <option value="선택" disabled>선택</option> {/* disabled 속성은 이 옵션을 선택할 수 없도록 합니다. */}
+            <option value="남">남</option>
+            <option value="여">여</option>
+          </select>
+        </StyledDiv>
+
+        <StyledDiv>
+          <StyledLabel>목표주량(소주 기준) :  </StyledLabel>
+          <select className='signupGoal' value={goal} onChange={(e) => setGoal(e.target.value)}>
+            <option value="선택" disabled>선택</option> {/* disabled 속성은 이 옵션을 선택할 수 없도록 합니다. */}
+            <option value="180">반병</option>
+            <option value="360">1병</option>
+            <option value="720">2병</option>
+            <option value="1080">3병 이상</option>
+          </select>
+        </StyledDiv>
+
         <br />
         <StyledButton type="submit">회원가입</StyledButton>
         {/* <button type="submit" onChange={e => setuserData('')}>회원가입</button> */}
       </StyledForm>
+
+
     </StyledDiv>
   );
 }

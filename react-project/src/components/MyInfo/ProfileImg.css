@@ -1,0 +1,67 @@
+.profile {
+    display: flex;  
+    flex-wrap: wrap; 
+    position: fixed;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.profile-content {
+    display: flex;              
+    flex-wrap: wrap;            /* 줄 바꿈 허용 */
+    flex: 1; /* 모든 공간을 차지하도록 설정 */
+    justify-content: center;
+    width: calc(3 * 60px + 2 * 10px);  /* 3개의 이미지 너비와 2번의 간격을 합한 값 */
+    background-color: white;
+    border-radius: 10px;
+    width: 350px;
+    height: auto;
+}
+
+.profile.open {
+    display: flex;
+    display: block;
+    background-color: #ffe0e0;
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.charChangebtn {
+    margin-top: 10%;
+    padding: 2%;
+    padding-left: 4%;
+    padding-right: 4%;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+    font-size:15px;
+    background: var(--pink);
+    font-weight: bolder;
+    width: max-content;
+}
+
+.profile > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-content img {
+    width: 100px;  
+    height: 100px; 
+    margin: 3px;
+    border-radius: 40%; 
+}
+
+.profile-content img.selected {
+    border: 5px solid var(--pink);
+    border-radius: 25px; /* 선택적: 모서리를 둥글게 만들어 줍니다 */
+  }
+  

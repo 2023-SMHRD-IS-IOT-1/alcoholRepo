@@ -1,4 +1,3 @@
-// 수정한 모달코드
 import React from 'react';
 import './CalendarStyle.css';
 import './Calendar';

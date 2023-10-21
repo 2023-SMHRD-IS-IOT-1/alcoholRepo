@@ -18,8 +18,7 @@ router.post('/getData', (req, res) => {
   console.log(phoneNumber);
   console.log(birthYear);
 
-  let sql = "insert into users (u_email, u_pw, u_name, u_phone, u_birthyear, u_gender, u_nickname, u_maxalcohol) "
-    + "values (?, ?, ?, ?, ?, ?, ?)"
+  let sql = "insert into users (u_email, u_pw, u_name, u_phone, u_birthyear, u_gender, u_nickname, u_maxalcohol) values (?, ?, ?, ?, ?, ?, ?, ?)"
 
   conn.query(sql, [email, password, name, phoneNumber, birthYear, gender, nickname, maxalcohol], (err, rows) => {
     console.log('회원가입 결과', rows)

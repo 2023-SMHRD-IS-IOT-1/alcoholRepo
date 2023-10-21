@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import './MyInfo.css'
+import './MyInfo.css';
+import { Userinfo } from '../../data/Data';
+import ProfileImg from './ProfileImg';
+import { useImage } from './ImageContext';
+
 
 const MyInfo = () => {
-    const [profileImage, setProfileImage] = useState('path_to_profile_image.jpg');
+    const [profileImage, setProfileImage] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [name, setName] = useState('');
@@ -10,6 +14,8 @@ const MyInfo = () => {
     const [birthYear, setBirthYear] = useState('선택');
     const [gender, setGender] = useState('선택');
     const [nickname, setNickname] = useState('');
+    const { selectedImage } = useImage();
+    const [goal, setGoal] = useState('');
 
     const [email, setEmail] = useState(''); // 초기값은 예시입니다.
 
@@ -25,7 +31,6 @@ const MyInfo = () => {
                     setNickname(data.nickname);
                     setBirthYear(data.birthYear);
                     setGender(data.gender);
-                    // ... 다른 상태 변수들도 데이터베이스의 값으로 설정
                 }
             } catch (error) {
                 console.error('Error fetching user data:', error);
@@ -35,15 +40,22 @@ const MyInfo = () => {
         fetchUserData();
     }, [email]);
 
+    // 사진변경 모달창 오픈!
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const openModal = () => {
+        setIsModalOpen(true);
+    }
+    const closeModal = () => {
+        setIsModalOpen(false);
+    }
 
+    // 비밀번호 확인하기
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
     }
-
     const handleConfirmPasswordChange = (e) => {
         setConfirmPassword(e.target.value);
     }
-
     const checkPasswordMatch = () => {
         if (password !== confirmPassword) {
             alert('비밀번호가 일치하지 않습니다.');
@@ -51,10 +63,6 @@ const MyInfo = () => {
             alert('비밀번호가 일치합니다.');
         }
     }
-
-    // const handleImageEdit = () => {
-    //     // 프로필 사진 수정 로직
-    // }
 
     const handleImageChange = async (e) => {
         const file = e.target.files[0];
@@ -82,31 +90,40 @@ const MyInfo = () => {
     }
 
     return (
-        <div>
-            <h2>마이페이지</h2>
+        <div className='myInfoBox'>
+            <h2 className='titleInfoBox'>마이페이지</h2>
             <div className="profile-section">
-                <img src={profileImage} alt="프로필 사진" id="profile-image" />
+                {selectedImage && <img src={selectedImage} alt="내 캐릭터" />}  
+                <button onClick={openModal}>사진 수정</button>
+                
+                {isModalOpen &&
+                    (<ProfileImg 
+                    isOpen={isModalOpen}
+                    onClose={closeModal}                
+                />)}
+
+                {/* <img src={profileImage} alt="프로필 사진" id="profile-image" />
                 <input type="file" id="image-upload" onChange={handleImageChange} style={{ display: 'none' }} />
                 <button onClick={() => document.getElementById('image-upload').click()} id="edit-image-btn">
                     사진 수정
-                </button>
+                </button> */}
             </div>
             <br />
 
             <div className="info-section">
-                <label htmlFor="username">이메일:</label>
-                <input type="text" id="username" value={email} readOnly />
-            </div>
+                <label htmlFor="username">Email :  </label>
+                <input type="text" id="username" value={Userinfo[0].u_email}readOnly />
+            
             <br />
 
-                <label htmlFor="password">비밀번호:</label>
+                <label htmlFor="password">Password :  </label>
                 <input type="password" id="password" value={password} onChange={handlePasswordChange} />
                 <br />
 
-                <label htmlFor="confirm-password">비밀번호 확인:</label>
+                <label htmlFor="confirm-password">Password Check : </label>
                 <input type="password" id="confirm-password" value={confirmPassword} onChange={handleConfirmPasswordChange} />
 
-                <button onClick={checkPasswordMatch} id="password-check-btn">비밀번호 확인</button>
+                <button className='checkPw' onClick={checkPasswordMatch} id="password-check-btn">비밀번호 확인</button>
 
             
                 <br />
@@ -115,49 +132,61 @@ const MyInfo = () => {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                placeholder={Userinfo[0].u_name}
                 />
                 <br/>
-                <label>Phone Number: </label>
+                <label>Nickname :  </label>
+                <input 
+                type="text"
+                value={nickname}
+                onChange={(e) => setNickname(e.target.value)}
+                placeholder={Userinfo[0].u_nickname}
+                />
+
+                <br/>
+                <label>Phone Number :  </label>
                 <input 
                 type="number"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
+                placeholder = {Userinfo[0].u_phone}
                 />
 
                 <br/>
-                <label>Birth Year: </label>
+                <label>Birth Year :  </label>
                 <select value={birthYear} onChange={(e) => setBirthYear(e.target.value)}>
-                    <option value="선택" disabled>선택</option> {/* disabled 속성은 이 옵션을 선택할 수 없도록 합니다. */}
-                {Array.from({length: 124}, (_, i) => 2023 - i).map(year => (
+                    <option value="선택">{`${Userinfo[0].u_birthyear}`}</option>
+                    {Array.from({length: 124}, (_, i) => 2023 - i).map(year => (
                     <option key={year} value={year}>{year}</option>
                 ))}
                 </select>
 
                 <br/>
-                <label>Gender: </label>
+                <label>Gender :  </label>
                 <select value={gender} onChange={(e) => setGender(e.target.value)}>
-                <option value="선택" disabled>선택</option> {/* disabled 속성은 이 옵션을 선택할 수 없도록 합니다. */}
-                <option value="남">남</option>
-                <option value="여">여</option>
+                    <option value="선택">{`${Userinfo[0].u_gender}`}</option>
+                    <option value="남">남</option>
+                    <option value="여">여</option>
                 </select>
 
                 <br/>
-                <label>Nickname: </label>
-                <input 
-                type="text"
-                value={nickname}
-                onChange={(e) => setNickname(e.target.value)}
-                />
-
+                <label>Alcohol Goal :  </label>
+                <select className='signupGoal' value={goal} onChange={(e) => setGoal(e.target.value)}>
+                    <option value="선택" disabled>선택</option> {/* disabled 속성은 이 옵션을 선택할 수 없도록 합니다. */}
+                    <option value="0.5">반병</option>
+                    <option value="1">1병</option>
+                    <option value="2">2병</option>
+                    <option value="3">3병 이상</option>
+                </select>
+            
+            </div>
                 <br/>
-                <button onClick={() => document.getElementById('info-upload').click()} id="edit-myInfo-btn">
+                <form>
+                <button className='editMyInfoBtn' onClick={() => document.getElementById('info-upload').click()} id="edit-myInfo-btn">
                     회원정보수정
                 </button>
-{/* 
-                <label htmlFor="age">나이:</label>
-                <input type="text" id="age" value="25" readOnly /> */}
-            </div>
-        
+                </form>
+            </div>       
     );
 }
 

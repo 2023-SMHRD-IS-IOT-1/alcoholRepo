@@ -6,7 +6,7 @@ export const StyledDiv = styled.div`
 
 export const StyledH1 = styled.h1`
   color: #fff;
-  background-color: #27ae60;
+  background-color: var(--pink);
   padding: 20px;
   text-align: center;
   margin-bottom: 50px;
@@ -26,7 +26,7 @@ export const StyledForm = styled.form`
 
 export const StyledH3 = styled.h3`
   color: #fff;
-  background-color: #27ae60;
+  background-color: var(--pink);
   padding: 10px;
   text-align: center;
   margin-bottom: 5px;
@@ -52,13 +52,15 @@ export const StyledInput = styled.input`
 export const StyledButton = styled.button`
   width: 50%;
   padding: 10px;
-  background-color: #27ae60;
+  background-color: var(--pink);
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.2s;
-
+  font-weight: bolder;
+  display: block;
+  margin: 0 auto;
   &:hover {
     background-color: #2ecc71;
   }

@@ -13,15 +13,15 @@ router.post('/getData', (req, res) => {
   let birthYear = parseInt(req.body[5]);
   let gender = req.body[6];
   let nickname = req.body[7];
-  let joindate = "2023-10-11 14:53:01"
+  let maxalcohol = req.body[8];
   // let { email, password, name, phoneNumber, birthYear, gender, nickname, joindate} = req.body;
   console.log(phoneNumber);
   console.log(birthYear);
 
-  let sql = "insert into users (u_email, u_pw, u_name, u_phone, u_birthyear, u_gender, u_nickname) "
+  let sql = "insert into users (u_email, u_pw, u_name, u_phone, u_birthyear, u_gender, u_nickname, u_maxalcohol) "
     + "values (?, ?, ?, ?, ?, ?, ?)"
 
-  conn.query(sql, [email, password, name, phoneNumber, birthYear, gender, nickname, joindate], (err, rows) => {
+  conn.query(sql, [email, password, name, phoneNumber, birthYear, gender, nickname, maxalcohol], (err, rows) => {
     console.log('회원가입 결과', rows)
     if (rows) {
       console.log('회원가입 성공');

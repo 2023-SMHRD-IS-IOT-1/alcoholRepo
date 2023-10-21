@@ -1,12 +1,12 @@
 import React from 'react'
-import { Cards, DataCheck, GraphMount } from '../components'
+import { Cards, DataCheck, AlcoholReport } from '../components'
 
 const Analytics = () => {
   return (
     <div>
       <DataCheck />
       <Cards />
-      <GraphMount />
+      <AlcoholReport />
     </div>
   )
 }

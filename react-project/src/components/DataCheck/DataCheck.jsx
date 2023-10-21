@@ -132,7 +132,7 @@ const DataCheck = () => {
                     for (let i = 23; i < 30; i++) {
                         sum += UserData[i].drink_time;
                     }
-                    value = sum/60+"시간"
+                    value = Math.ceil(sum/60*100)/100+"시간"
                     barValue = Math.ceil(sum / (60*24*7) *100 * 100)/100
                     for (let j = 0; j < 30; j++) {
                         seriesdata.push(UserData[j].drink_time);
@@ -161,7 +161,7 @@ const DataCheck = () => {
                         sum += UserData[i].drink_speed;
                     }
                     value = sum + "ml/h";
-                    barValue = sum / 7
+                    barValue = Math.ceil(sum / 7 * 100)/100
                     for (let j = 0; j < 30; j++) {
                         seriesdata.push(UserData[j].drink_speed);
                     }

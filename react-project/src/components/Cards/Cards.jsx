@@ -6,9 +6,10 @@ import Card from '../Card/Card'
 const Cards = () => {
   return (
     <div>
-      <h1>
+      <br />
+      <h3>
         MyAlcoholCard
-      </h1>
+      </h3>
       <div className="Cards">
         {CardsData.map((card, id) => {
           return (

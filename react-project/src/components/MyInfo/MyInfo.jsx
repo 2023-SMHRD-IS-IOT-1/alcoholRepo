@@ -12,6 +12,9 @@ import onemoreSticker from '../../data/onemoreAlcohol.png';
 import waveSticker from '../../data/waveAlcohol.png';
 import bottleSticker from '../../data/bottleAlcohol.png';
 
+import axios from '../../axios';
+import { useNavigate } from 'react-router-dom';
+
 const MyInfo = () => {
     // const [profileImage, setProfileImage] = useState('');
     const [password, setPassword] = useState('');
@@ -24,21 +27,21 @@ const MyInfo = () => {
     const [selectedImg, setSelectedImg] = useState('');
     const [goal, setGoal] = useState('');
     const [time, setTime] = useState('');
-    const [email, setEmail] = useState(''); 
+    const [email, setEmail] = useState('');
 
-    console.log(Userinfo[0].u_img);
+    const navigate = useNavigate();
 
     const images = {
         donotSticker, fullSticker, pushSticker, soakSticker,
         princessSticker, needSticker, onemoreSticker, waveSticker, bottleSticker
-      };
+    };
 
     useEffect(() => {
         const fetchUserData = async () => {
             try {
                 const response = await fetch(`/user/${email}`);
                 const data = await response.json();
-                
+
                 if (data) {
                     setName(data.name);
                     setPhoneNumber(data.phoneNumber);
@@ -64,10 +67,13 @@ const MyInfo = () => {
     }
     // 프로필사진 변경을 위한 함수 => selectedImage  상태가 변경될 때마다 실행되도록
     useEffect(() => {
-        setSelectedImg(images[Userinfo[0].u_img])
-    }, [Userinfo[0].u_img]);
+        Userinfo[0].u_imgchange = Userinfo[0].u_img
+    }, []);
+    useEffect(() => {
+        setSelectedImg(images[Userinfo[0].u_imgchange])
+    }, [Userinfo[0].u_imgchange]);
 
-    const handleImageChange =(imgUrl) => {
+    const handleImageChange = (imgUrl) => {
         // setSelectedImg(imgUrl);
     }
 
@@ -81,8 +87,44 @@ const MyInfo = () => {
     const checkPasswordMatch = () => {
         if (password !== confirmPassword) {
             alert('비밀번호가 일치하지 않습니다.');
-        }else {
+        } else {
             alert('비밀번호가 일치합니다.');
+        }
+    }
+
+    useEffect(() => {
+        setEmail(Userinfo[0].u_email);
+        setPassword(Userinfo[0].u_pw);
+        setName(Userinfo[0].u_name);
+        setPhoneNumber(Userinfo[0].u_phone);
+        setBirthYear(Userinfo[0].u_birthyear);
+        setGender(Userinfo[0].u_gender);
+        setNickname(Userinfo[0].u_nickname);
+        setSelectedImg(Userinfo[0].u_img);
+        setGoal(Userinfo[0].u_maxalcohol);
+        setTime(Userinfo[0].u_maxtime);
+    }, [])    
+
+    const handleChangeInfo = async (e) => {
+        e.preventDefault();
+        console.log("정보 변경 시도");
+        if (password === confirmPassword) {
+            try {
+                Userinfo[0].u_img = Userinfo[0].u_imgchange
+                const response = await axios.post('/user/getUpdate', [email, password, name, phoneNumber, birthYear, gender, nickname, goal, time, Userinfo[0].u_img]);
+                if (response.data.exists) {
+                    console.log("정보 변경 성공");
+                    alert('정보가 성공적으로 변경되었습니다.');
+                    navigate('/');
+                    // history.back();
+                } else {
+                    console.log("정보 변경 실패");
+                }
+            } catch (err) {
+                // setMessage('에러가 발생했습니다. 다시 시도하세요.');
+            }
+        } else {
+            console.log("PW 다름");
         }
     }
 
@@ -93,22 +135,22 @@ const MyInfo = () => {
                 {/* <img src={Userinfo[0].u_img} alt="프로필 이미지" ></img> */}
                 <img src={selectedImg} alt="프로필 이미지" ></img>
                 <button onClick={openModal}>사진 수정</button>
-                
+
                 {isModalOpen &&
-                    (<ProfileImg 
-                    isOpen={isModalOpen}
-                    onClose={closeModal}    
-                    onImageChange={handleImageChange}            
-                />)}
+                    (<ProfileImg
+                        isOpen={isModalOpen}
+                        onClose={closeModal}
+                        onImageChange={handleImageChange}
+                    />)}
 
             </div>
             <br />
 
             <div className="info-section">
                 <label htmlFor="username">Email :  </label>
-                <input type="text" id="username" value={Userinfo[0].u_email}readOnly />
-            
-            <br />
+                <input type="text" id="username" value={Userinfo[0].u_email} readOnly />
+
+                <br />
 
                 <label htmlFor="password">Password :  </label>
                 <input type="password" id="password" value={password} onChange={handlePasswordChange} />
@@ -119,43 +161,43 @@ const MyInfo = () => {
 
                 <button className='checkPw' onClick={checkPasswordMatch} id="password-check-btn">비밀번호 확인</button>
 
-            
+
                 <br />
                 <label>Name: </label>
-                <input 
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder={Userinfo[0].u_name}
+                <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder={Userinfo[0].u_name}
                 />
-                <br/>
+                <br />
                 <label>Nickname :  </label>
-                <input 
-                type="text"
-                value={nickname}
-                onChange={(e) => setNickname(e.target.value)}
-                placeholder={Userinfo[0].u_nickname}
+                <input
+                    type="text"
+                    value={nickname}
+                    onChange={(e) => setNickname(e.target.value)}
+                    placeholder={Userinfo[0].u_nickname}
                 />
 
-                <br/>
+                <br />
                 <label>Phone Number :  </label>
-                <input 
-                type="number"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-                placeholder = {Userinfo[0].u_phone}
+                <input
+                    type="number"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    placeholder={Userinfo[0].u_phone}
                 />
 
-                <br/>
+                <br />
                 <label>Birth Year :  </label>
                 <select value={birthYear} onChange={(e) => setBirthYear(e.target.value)}>
                     <option value="선택">{`${Userinfo[0].u_birthyear}`}</option>
-                    {Array.from({length: 124}, (_, i) => 2023 - i).map(year => (
-                    <option key={year} value={year}>{year}</option>
-                ))}
+                    {Array.from({ length: 124 }, (_, i) => 2023 - i).map(year => (
+                        <option key={year} value={year}>{year}</option>
+                    ))}
                 </select>
 
-                <br/>
+                <br />
                 <label>Gender :  </label>
                 <select value={gender} onChange={(e) => setGender(e.target.value)}>
                     <option value="선택">{`${Userinfo[0].u_gender}`}</option>
@@ -163,10 +205,10 @@ const MyInfo = () => {
                     <option value="여">여</option>
                 </select>
 
-                <br/>
+                <br />
                 <label>일주일 설정 주량(소주 기준) :  </label>
                 <select className='signupGoal' value={goal} onChange={(e) => setGoal(e.target.value)}>
-                    <option value="선택">{`${(Userinfo[0].u_maxalcohol)/360}`+"병"}</option> 
+                    <option value="선택">{`${(Userinfo[0].u_maxalcohol) / 360}` + "병"}</option>
                     {/* disabled 속성은 이 옵션을 선택할 수 없도록 함. */}
                     <option value="180">반병</option>
                     <option value="360">1병</option>
@@ -181,10 +223,10 @@ const MyInfo = () => {
                     <option value="3600">10병</option>
                 </select>
 
-                <br/>
+                <br />
                 <label>일주일 설정 시간 :  </label>
                 <select className='signupGoal' value={time} onChange={(e) => setTime(e.target.value)}>
-                    <option value="선택">{`${(Userinfo[0].u_maxtime)/60}`+"시간"}</option> {/* disabled 속성은 이 옵션을 선택할 수 없도록 합니다. */}
+                    <option value="선택">{`${(Userinfo[0].u_maxtime) / 60}` + "시간"}</option> {/* disabled 속성은 이 옵션을 선택할 수 없도록 합니다. */}
                     <option value="30">30분</option>
                     <option value="60">1시간</option>
                     <option value="120">2시간</option>
@@ -197,15 +239,18 @@ const MyInfo = () => {
                     <option value="540">9시간</option>
                     <option value="600">10시간</option>
                 </select>
-            
+
             </div>
-                <br/>
-                <form>
-                <button className='editMyInfoBtn' onClick={() => document.getElementById('info-upload').click()} id="edit-myInfo-btn">
+            <br />
+            <form>
+                {/* <button className='editMyInfoBtn' onClick={() => document.getElementById('info-upload').click()} id="edit-myInfo-btn">
+                    회원정보수정
+                </button> */}
+                <button className='editMyInfoBtn' onClick={handleChangeInfo} id="edit-myInfo-btn">
                     회원정보수정
                 </button>
-                </form>
-            </div>       
+            </form>
+        </div>
     );
 }
 

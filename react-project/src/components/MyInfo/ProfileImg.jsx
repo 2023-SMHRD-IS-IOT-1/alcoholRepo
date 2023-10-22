@@ -22,7 +22,7 @@ function ProfileImg({isOpen, onClose, onImageChange}) {
   
   const handleImgClick = (imgName) => {
     const imgUrl = images[imgName];
-    Userinfo[0].u_img = imgName;
+    Userinfo[0].u_imgchange = imgName;
     setSelectedImg(imgName);
     onImageChange(imgUrl);
   }

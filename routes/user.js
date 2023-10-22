@@ -115,20 +115,21 @@ router.get("/logout", (req, res) => {
 router.post('/getUpdate', (req, res) => {
   let email = req.body[0];
   let password = req.body[1];
-  let confirmPassword = req.body[2];
-  let name = req.body[3];
-  let phoneNumber = req.body[4];
-  let birthYear = parseInt(req.body[5]);
-  let gender = req.body[6];
-  let nickname = req.body[7];
+  let name = req.body[2];
+  let phoneNumber = req.body[3];
+  let birthYear = parseInt(req.body[4]);
+  let gender = req.body[5];
+  let nickname = req.body[6];
+  let goal = req.body[7];
+  let time = req.body[8];
+  let img = req.body[9];
+
+  console.log(img);
   // let { email, password, name, phoneNumber, birthYear, gender, nickname, joindate} = req.body;
-  console.log(phoneNumber);
-  console.log(birthYear);
 
-  let sql = "update users set u_pw =?, u_name = ?, u_phone = ?, u_birthyear = ?, u_gender = ?, u_nickname = ?"
-    + "WHERE  u_email = ?"
+  let sql = "update users set u_pw =?, u_name = ?, u_phone = ?, u_birthyear = ?, u_gender = ?, u_nickname = ?, u_maxalcohol = ?, u_maxtime = ?, u_img = ? WHERE u_email = ?"
 
-  conn.query(sql, [password, name, phoneNumber, birthYear, gender, nickname, email], (err, rows) => {
+  conn.query(sql, [password, name, phoneNumber, birthYear, gender, nickname, goal, time, img, email], (err, rows) => {
     console.log('회원정보수정 결과', rows)
     if (rows) {
       console.log('수정 성공');
@@ -138,6 +139,28 @@ router.post('/getUpdate', (req, res) => {
       res.json({ exists: false });
     }
   });
+})
+
+
+// PW 변경
+router.post('/ChangePW', (req, res) => {
+  console.log('ChangePW', req.body);
+  let email = req.body[0];
+  let pw = req.body[1];
+
+
+  let sql = "update users set u_pw = ? where u_email = ?"
+
+  conn.query(sql, [pw, email], (err, rows) => {
+    console.log('PW변경 결과', rows)
+    if (rows) {
+      console.log('PW변경 성공')
+      res.json({ exists: true })
+    } else {
+      console.log('PW변경 실패')
+      res.json({ exists: false });
+    }
+  })
 })
 
 // ID 찾기

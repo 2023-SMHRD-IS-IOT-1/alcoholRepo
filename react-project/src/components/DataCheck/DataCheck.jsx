@@ -90,6 +90,9 @@ const DataCheck = () => {
                 let barValue = 0;
                 let sum = 0;
                 let value = 0;
+                let barValueAdd = 0;
+                let sumAdd = 0;
+                let valueAdd = 0;
                 let seriesdata = [];
                 let seriesput = [];
                 let card_alcohol;
@@ -106,6 +109,11 @@ const DataCheck = () => {
                 }
                 value = Math.ceil(sum / 360 * 100) / 100 + "병"
                 barValue = Math.ceil(sum / Userinfo[0].u_maxalcohol * 100 * 100) / 100
+                for (let i = 0; i < 30; i++) {
+                    sumAdd += UserData[i].soju_ml;
+                }
+                valueAdd = Math.ceil(sumAdd / 360 * 100) / 100 + "병"
+                barValueAdd = Math.ceil(sumAdd / (Userinfo[0].u_maxalcohol/7*30) * 100 * 100) / 100
                 for (let j = 0; j < 30; j++) {
                     seriesdata.push(UserData[j].soju_ml);
                 }
@@ -113,12 +121,17 @@ const DataCheck = () => {
                 card_alcohol.barValue = barValue
                 card_alcohol.value = value
                 card_alcohol.series = seriesput
+                card_alcohol.barValueAdd = barValueAdd
+                card_alcohol.valueAdd = valueAdd
                 // CardsData.push(card_alcohol);
                 CardsData[0] = card_alcohol;
 
                 barValue = 0;
                 sum = 0;
                 value = 0;
+                barValueAdd = 0;
+                sumAdd = 0;
+                valueAdd = 0;
                 seriesdata = [];
                 seriesput = [];
                 let card_alcoholtime;
@@ -134,7 +147,12 @@ const DataCheck = () => {
                     sum += UserData[i].drink_time;
                 }
                 value = Math.ceil(sum / 60 * 100) / 100 + "h"
-                barValue = Math.ceil(sum / (60 * (Userinfo[0].u_maxtime / 60)) * 100 * 100) / 100
+                barValue = Math.ceil((sum / Userinfo[0].u_maxtime) * 100 * 100) / 100
+                for (let i = 0; i < 30; i++) {
+                    sumAdd += UserData[i].drink_time;
+                }
+                valueAdd = Math.ceil(sumAdd / 60 * 100) / 100 + "h"
+                barValueAdd = Math.ceil((sumAdd / (Userinfo[0].u_maxtime/7*30)) * 100 * 100) / 100
                 for (let j = 0; j < 30; j++) {
                     seriesdata.push(UserData[j].drink_time);
                 }
@@ -142,12 +160,17 @@ const DataCheck = () => {
                 card_alcoholtime.barValue = barValue
                 card_alcoholtime.value = value
                 card_alcoholtime.series = seriesput
+                card_alcoholtime.barValueAdd = barValueAdd
+                card_alcoholtime.valueAdd = valueAdd
                 // CardsData.push(card_alcoholtime);
                 CardsData[1] = card_alcoholtime;
 
                 barValue = 0;
                 sum = 0;
                 value = 0;
+                barValueAdd = 0;
+                sumAdd = 0;
+                valueAdd = 0;
                 seriesdata = [];
                 seriesput = [];
                 let card_alcoholspeed;
@@ -164,6 +187,11 @@ const DataCheck = () => {
                 }
                 value = Math.ceil(CardsData[0].value.replace('병', '') * 360 / CardsData[1].value.replace('h', '') * 100) / 100 + "ml/h";
                 barValue = Math.ceil(value.replace('ml/h', '') / ((Userinfo[0].u_maxalcohol) / (Userinfo[0].u_maxtime / 60)) * 100 * 100) / 100
+                for (let i = 0; i < 30; i++) {
+                    sumAdd += UserData[i].drink_speed;
+                }
+                valueAdd = Math.ceil(CardsData[0].valueAdd.replace('병', '') * 360 / CardsData[1].valueAdd.replace('h', '') * 100) / 100 + "ml/h";
+                barValueAdd = Math.ceil(valueAdd.replace('ml/h', '') / ((Userinfo[0].u_maxalcohol) / (Userinfo[0].u_maxtime / 60)) * 100 * 100) / 100
                 for (let j = 0; j < 30; j++) {
                     seriesdata.push(UserData[j].drink_speed);
                 }
@@ -171,12 +199,17 @@ const DataCheck = () => {
                 card_alcoholspeed.barValue = barValue
                 card_alcoholspeed.value = value
                 card_alcoholspeed.series = seriesput
+                card_alcoholspeed.barValueAdd = barValueAdd
+                card_alcoholspeed.valueAdd = valueAdd
                 // CardsData.push(card_alcoholspeed);
                 CardsData[2] = card_alcoholspeed;
 
                 barValue = 0;
                 sum = 0;
                 value = 0;
+                barValueAdd = 0;
+                sumAdd = 0;
+                valueAdd = 0;
                 seriesdata = [];
                 seriesput = [];
 

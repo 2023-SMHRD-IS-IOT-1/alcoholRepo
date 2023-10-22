@@ -67,30 +67,30 @@ export default function BasicTable() {
   let drink;
   let drinkdetail = (
     <span>
-      일주일간 마신 음주량은
+      <span style={{ color: 'blue', fontWeight: 'bold' }}>일주일</span>간 마신 음주량은
       <span style={{ color: 'red', fontWeight: 'bold' }}> {CardsData[0].value}</span> 입니다.
-      일주일 설정 음주량
-      <span style={{ color: 'red', fontWeight: 'bold' }}> {Math.ceil(Userinfo[0].u_maxalcohol/360*100)/100}병</span> 에 비해 
+      <span style={{ color: 'blue', fontWeight: 'bold' }}> 일주일</span> 설정 음주량
+      <span style={{ color: 'red', fontWeight: 'bold' }}> {Math.ceil(Userinfo[0].u_maxalcohol / 360 * 100) / 100}병</span> 에 비해
     </span>
   );
   let drinkdetailadd
   let drinktime;
   let drinktimedetail = (
     <span>
-      일주일간 마신 음주시간은
-      <span style={{ color: 'red', fontWeight: 'bold' }}> {Math.ceil(CardsData[1].value.replace('h', '') *100)/100}h</span> 입니다.
-      일주일 설정 음주시간
-      <span style={{ color: 'red', fontWeight: 'bold' }}> {Math.ceil(Userinfo[0].u_maxtime/60*100)/100}h</span> 에 비해 
+      <span style={{ color: 'blue', fontWeight: 'bold' }}>일주일</span>간 마신 음주시간은
+      <span style={{ color: 'red', fontWeight: 'bold' }}> {Math.ceil(CardsData[1].value.replace('h', '') * 100) / 100}h</span> 입니다.
+      <span style={{ color: 'blue', fontWeight: 'bold' }}> 일주일</span> 설정 음주시간
+      <span style={{ color: 'red', fontWeight: 'bold' }}> {Math.ceil(Userinfo[0].u_maxtime / 60 * 100) / 100}h</span> 에 비해
     </span>
   );
   let drinktimedetailadd
   let drinkspeed;
   let drinkspeeddetail = (
     <span>
-      일주일간 마신 하루 평균 음주속도는
+      <span style={{ color: 'blue', fontWeight: 'bold' }}>일주일</span>간 마신 하루 평균 음주속도는
       <span style={{ color: 'red', fontWeight: 'bold' }}> {CardsData[2].value}</span> 입니다.
-      일주일 설정 평균 음주속도
-      <span style={{ color: 'red', fontWeight: 'bold' }}> {Math.ceil((Userinfo[0].u_maxalcohol)/(Userinfo[0].u_maxtime/60)*100)/100}ml/h</span> 에 비해
+      <span style={{ color: 'blue', fontWeight: 'bold' }}> 일주일</span> 설정 평균 음주속도
+      <span style={{ color: 'red', fontWeight: 'bold' }}> {Math.ceil((Userinfo[0].u_maxalcohol) / (Userinfo[0].u_maxtime / 60) * 100) / 100}ml/h</span> 에 비해
     </span>
   );
   let drinkspeeddetailadd
@@ -101,8 +101,8 @@ export default function BasicTable() {
     drink = "양호"
     drinkdetailadd = (
       <span>
-        <span style={{ color: '#43aa8b', fontWeight: 'bold' }}> {Math.ceil(CardsData[0].barValue*100)/100}%</span>로
-        설정 음주량의 <span style={{ color: '#43aa8b', fontWeight: 'bold' }}> 80% 이하</span> 입니다. 
+        <span style={{ color: '#43aa8b', fontWeight: 'bold' }}> {Math.ceil(CardsData[0].barValue * 100) / 100}%</span>로
+        설정 음주량의 <span style={{ color: '#43aa8b', fontWeight: 'bold' }}> 80% 이하</span> 입니다.
         <br />
         <span style={{ color: '#43aa8b', fontWeight: 'bold', fontSize: '15px' }}> 양호합니다.</span>
       </span>
@@ -111,8 +111,8 @@ export default function BasicTable() {
     drink = "주의"
     drinkdetailadd = (
       <span>
-        <span style={{ color: '#f9c74f', fontWeight: 'bold' }}> {Math.ceil(CardsData[0].barValue*100)/100}%</span>로
-        설정 음주량의 <span style={{ color: '#f9c74f', fontWeight: 'bold' }}> 80% 이상</span> 입니다. 
+        <span style={{ color: '#f9c74f', fontWeight: 'bold' }}> {Math.ceil(CardsData[0].barValue * 100) / 100}%</span>로
+        설정 음주량의 <span style={{ color: '#f9c74f', fontWeight: 'bold' }}> 80% 이상</span> 입니다.
         <br />
         <span style={{ color: '#f9c74f', fontWeight: 'bold', fontSize: '15px' }}> 주의가 필요합니다.</span>
       </span>
@@ -121,7 +121,7 @@ export default function BasicTable() {
     drink = "경고"
     drinkdetailadd = (
       <span>
-        <span style={{ color: '#f94144', fontWeight: 'bold' }}> {Math.ceil(CardsData[0].barValue*100)/100}%</span>로
+        <span style={{ color: '#f94144', fontWeight: 'bold' }}> {Math.ceil(CardsData[0].barValue * 100) / 100}%</span>로
         설정 음주량의 <span style={{ color: '#f94144', fontWeight: 'bold' }}> 100% 이상</span> 입니다.
         <br />
         <span style={{ color: '#f94144', fontWeight: 'bold', fontSize: '15px' }}> 음주량 관리가 필요합니다.</span>
@@ -130,7 +130,7 @@ export default function BasicTable() {
   }
   drinkdetail = (
     <div>
-    {drinkdetail} {drinkdetailadd}
+      {drinkdetail} {drinkdetailadd}
     </div>
   )
 
@@ -138,8 +138,8 @@ export default function BasicTable() {
     drinktime = "양호"
     drinktimedetailadd = (
       <span>
-        <span style={{ color: '#43aa8b', fontWeight: 'bold' }}> {Math.ceil(CardsData[1].barValue*100)/100}%</span>로
-        설정 음주시간의 <span style={{ color: '#43aa8b', fontWeight: 'bold' }}> 80% 이하</span> 입니다. 
+        <span style={{ color: '#43aa8b', fontWeight: 'bold' }}> {Math.ceil(CardsData[1].barValue * 100) / 100}%</span>로
+        설정 음주시간의 <span style={{ color: '#43aa8b', fontWeight: 'bold' }}> 80% 이하</span> 입니다.
         <br />
         <span style={{ color: '#43aa8b', fontWeight: 'bold', fontSize: '15px' }}> 양호합니다.</span>
       </span>
@@ -148,8 +148,8 @@ export default function BasicTable() {
     drinktime = "주의"
     drinktimedetailadd = (
       <span>
-        <span style={{ color: '#f9c74f', fontWeight: 'bold' }}> {Math.ceil(CardsData[1].barValue*100)/100}%</span>로
-        설정 음주시간의 <span style={{ color: '#f9c74f', fontWeight: 'bold' }}> 80% 이상</span> 입니다. 
+        <span style={{ color: '#f9c74f', fontWeight: 'bold' }}> {Math.ceil(CardsData[1].barValue * 100) / 100}%</span>로
+        설정 음주시간의 <span style={{ color: '#f9c74f', fontWeight: 'bold' }}> 80% 이상</span> 입니다.
         <br />
         <span style={{ color: '#f9c74f', fontWeight: 'bold', fontSize: '15px' }}> 주의가 필요합니다.</span>
       </span>
@@ -158,7 +158,7 @@ export default function BasicTable() {
     drinktime = "경고"
     drinktimedetailadd = (
       <span>
-        <span style={{ color: '#f94144', fontWeight: 'bold' }}> {Math.ceil(CardsData[1].barValue*100)/100}%</span>로
+        <span style={{ color: '#f94144', fontWeight: 'bold' }}> {Math.ceil(CardsData[1].barValue * 100) / 100}%</span>로
         설정 음주시간의 <span style={{ color: '#f94144', fontWeight: 'bold' }}> 100% 이상</span> 입니다.
         <br />
         <span style={{ color: '#f94144', fontWeight: 'bold', fontSize: '15px' }}> 음주시간 관리가 필요합니다.</span>
@@ -167,7 +167,7 @@ export default function BasicTable() {
   }
   drinktimedetail = (
     <div>
-    {drinktimedetail} {drinktimedetailadd}
+      {drinktimedetail} {drinktimedetailadd}
     </div>
   )
 
@@ -175,8 +175,8 @@ export default function BasicTable() {
     drinkspeed = "양호"
     drinkspeeddetailadd = (
       <span>
-        <span style={{ color: '#43aa8b', fontWeight: 'bold' }}> {Math.ceil(CardsData[2].barValue*100)/100}%</span>로
-        설정 음주속도의 <span style={{ color: '#43aa8b', fontWeight: 'bold' }}> 80% 이하</span> 입니다. 
+        <span style={{ color: '#43aa8b', fontWeight: 'bold' }}> {Math.ceil(CardsData[2].barValue * 100) / 100}%</span>로
+        설정 음주속도의 <span style={{ color: '#43aa8b', fontWeight: 'bold' }}> 80% 이하</span> 입니다.
         <br />
         <span style={{ color: '#43aa8b', fontWeight: 'bold', fontSize: '15px' }}> 양호합니다.</span>
       </span>
@@ -185,8 +185,8 @@ export default function BasicTable() {
     drinkspeed = "주의"
     drinkspeeddetailadd = (
       <span>
-        <span style={{ color: '#f9c74f', fontWeight: 'bold' }}> {Math.ceil(CardsData[2].barValue*100)/100}%</span>로
-        설정 음주속도의 <span style={{ color: '#f9c74f', fontWeight: 'bold' }}> 80% 이상</span> 입니다. 
+        <span style={{ color: '#f9c74f', fontWeight: 'bold' }}> {Math.ceil(CardsData[2].barValue * 100) / 100}%</span>로
+        설정 음주속도의 <span style={{ color: '#f9c74f', fontWeight: 'bold' }}> 80% 이상</span> 입니다.
         <br />
         <span style={{ color: '#f9c74f', fontWeight: 'bold', fontSize: '15px' }}> 주의가 필요합니다.</span>
       </span>
@@ -195,7 +195,7 @@ export default function BasicTable() {
     drinkspeed = "경고"
     drinkspeeddetailadd = (
       <span>
-        <span style={{ color: '#f94144', fontWeight: 'bold' }}> {Math.ceil(CardsData[2].barValue*100)/100}%</span>로
+        <span style={{ color: '#f94144', fontWeight: 'bold' }}> {Math.ceil(CardsData[2].barValue * 100) / 100}%</span>로
         설정 음주속도의 <span style={{ color: '#f94144', fontWeight: 'bold' }}> 100% 이상</span> 입니다.
         <br />
         <span style={{ color: '#f94144', fontWeight: 'bold', fontSize: '15px' }}> 천천히 마실 필요가 있습니다.</span>
@@ -204,7 +204,7 @@ export default function BasicTable() {
   }
   drinkspeeddetail = (
     <div>
-    {drinkspeeddetail} {drinkspeeddetailadd}
+      {drinkspeeddetail} {drinkspeeddetailadd}
     </div>
   )
 
@@ -216,8 +216,7 @@ export default function BasicTable() {
   return (
     <div className="Table">
       <br />
-      <br />
-      <h1>7days User Analyze</h1>
+      <h3>7days User Analyze</h3>
       <TableContainer
         component={Paper}
         style={{
@@ -241,7 +240,7 @@ export default function BasicTable() {
                 key={row.name}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell component="th" scope="row" align="center" style={{fontWeight: 'bold', fontSize: '15px'}}>
+                <TableCell component="th" scope="row" align="center" style={{ fontWeight: 'bold', fontSize: '15px' }}>
                   {row.name}
                 </TableCell>
                 <TableCell align="center">{row.trackingId}</TableCell>

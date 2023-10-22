@@ -18,9 +18,11 @@ const SignUp = () => {
   const [birthYear, setBirthYear] = useState('선택');
   const [gender, setGender] = useState('선택');
   const [nickname, setNickname] = useState('');
-  const [mount, setMount] = useState('');
-  const [time, setTime] = useState('');
+  const [mount, setMount] = useState('선택');
+  const [time, setTime] = useState('선택');
+  const [img, setImg] = useState('donotSticker');
   const navigate = useNavigate();
+
 
   // email 유효성 확인
   const [isValidEmail, setIsValidEmail] = useState(true);
@@ -33,24 +35,55 @@ const SignUp = () => {
 
   // email 중복확인
   const [message, setMessage] = useState('');
+  const [emailCheck, setEmailCheck] = useState(false);
   const checkDuplicateEmail = async (e) => {
     e.preventDefault();
-
-    try {
-      const response = await axios.post('/checkemail', [email]);
-      if (response.data.exists) {
-        setMessage('이메일이 이미 존재합니다.');
-      } else {
-        setMessage('사용 가능한 이메일입니다.');
+    if (!isValidEmail) {
+      setEmailCheck(false);
+      setMessage('이메일를 입력해주세요.');
+    } else {
+      try {
+        const response = await axios.post('/user/checkemail', [email]);
+        if (response.data.exists) {
+          setEmailCheck(false);
+          setMessage('이메일이 이미 존재합니다.');
+        } else {
+          setEmailCheck(true);
+          setMessage('사용 가능한 이메일입니다.');
+        }
+      } catch (err) {
+        setMessage('에러가 발생했습니다. 다시 시도하세요.');
       }
-    } catch (err) {
-      // setMessage('에러가 발생했습니다. 다시 시도하세요.');
+    }
+  };
+
+  // 닉네임 중복확인
+  const [messageNick, setMessageNick] = useState('');
+  const [nicknameCheck, setNicknameCheck] = useState(false);
+  const checkDuplicateNickname = async (e) => {
+    e.preventDefault();
+    if (nickname==='') {
+      setNicknameCheck(false);
+      setMessageNick('닉네임를 입력해주세요.');
+    } else {
+      try {
+        const response = await axios.post('/user/checknickname', [nickname]);
+        if (response.data.exists) {
+          setNicknameCheck(false);
+          setMessageNick('닉네임이 이미 존재합니다.');
+        } else {
+          setNicknameCheck(true);
+          setMessageNick('사용 가능한 닉네임입니다.');
+        }
+      } catch (err) {
+        setMessage('에러가 발생했습니다. 다시 시도하세요.');
+      }
     }
   };
 
   // 비밀번호 확인
   // (1) 비밀번호 일치 여부 확인
-  const [isPasswordMatching, setIsPasswordMatching] = useState(true);
+  const [isPasswordMatching, setIsPasswordMatching] = useState(false);
   // (2) pw, confirmpw 값이 변경될 때마다 일치 여부 확인 및 업데이트
   useEffect(() => {
     if (password && confirmPassword) {
@@ -58,6 +91,37 @@ const SignUp = () => {
     }
   }, [password, confirmPassword]);
 
+  // email 유효성 확인
+  const [messageForm, setMessageForm] = useState('Email 중복 확인을 해주세요.');
+  const [isValidForm, setIsValidForm] = useState(true);
+  
+  useEffect(() => {
+    if (emailCheck === false) {
+      setMessageForm('Email 중복확인을 해주세요.')
+    }else if (nicknameCheck === false) {
+      setMessageForm('닉네임 중복확인을 해주세요.')
+    }
+    else if (isPasswordMatching === false) {
+      setMessageForm('PW를 확인해주세요.')
+    } else if (email !== '' &&
+    password !== '' &&
+    confirmPassword !== '' &&
+    name !== '' &&
+    phoneNumber !== '' &&
+    birthYear !== '선택' &&
+    gender !== '선택' &&
+    nickname !== '' &&
+    mount !== '선택' &&
+    time !== '선택' &&
+    img !== '선택' ) {
+      setMessageForm('항목을 다 채웠습니다. 회원가입이 가능합니다.')
+      setIsValidForm(false);
+    } else {
+      setMessageForm('항목을 채워주세요.')
+      setIsValidForm(true);
+    }
+    console.log(isValidForm)
+  }, [emailCheck, nicknameCheck, isPasswordMatching, email, password, confirmPassword, name, phoneNumber, birthYear, gender, nickname, mount, time, img])
 
 
   /* handleSignup 함수는 회원가입 양식이 제출될 때 실행됩니다.
@@ -67,8 +131,10 @@ const SignUp = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     console.log('User Info:', password);
-    
-    axios.post('/user/getData', [email, password, confirmPassword, name, phoneNumber, birthYear, gender, nickname, mount, time])
+    if (setEmailCheck && !setIsValidForm) {
+
+    }
+    axios.post('/user/getData', [email, password, confirmPassword, name, phoneNumber, birthYear, gender, nickname, mount, time, img])
       .then(res => {
         console.log('백엔드에서 넘어온 데이터', res.data)
         navigate('/');
@@ -88,14 +154,17 @@ const SignUp = () => {
             onChange={(e) => setEmail(e.target.value)}
             placeholder='이메일을 입력하세요'
           />
-          <StyledButton type="button" onClick={checkDuplicateEmail}>중복확인</StyledButton>
+          <br />
           {/* 조건부 렌더링 */}
           {email && !isValidEmail && (
             <StyledSpan style={{ color: 'red' }}>
               이메일 형식이 올바르지 않습니다.
             </StyledSpan>
           )}
-          <StyledP>{message}</StyledP>
+          <StyledButton type="button" onClick={checkDuplicateEmail}>Email 중복확인</StyledButton>
+          <StyledP style={{ color: emailCheck ? 'green' : 'red' }}>
+            {emailCheck ? `${message}` : `${message}`}
+          </StyledP>
         </StyledDiv>
 
         <StyledDiv>
@@ -116,6 +185,7 @@ const SignUp = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder='********'
           />
+          <br />
           {/* 조건부 렌더링 => pw, cpw에 값이 있는 경우 true, true일 때만 span태그 렌더링됨 */}
           {password && confirmPassword && (
             <StyledSpan style={{ color: isPasswordMatching ? 'green' : 'red' }}>
@@ -142,6 +212,10 @@ const SignUp = () => {
             onChange={(e) => setNickname(e.target.value)}
             placeholder='주정뱅이'
           />
+          <StyledButton type="button" onClick={checkDuplicateNickname}>닉네임 중복확인</StyledButton>
+          <StyledP style={{ color: nicknameCheck ? 'green' : 'red' }}>
+            {nicknameCheck ? `${messageNick}` : `${messageNick}`}
+          </StyledP>
         </StyledDiv>
 
         <StyledDiv>
@@ -208,8 +282,20 @@ const SignUp = () => {
             <option value="600">10시간</option>
           </select>
         </StyledDiv>
-
         <br />
+        {/* 조건부 렌더링 */}
+        {isValidForm && (
+          <StyledP style={{ color: 'red' }}>
+            {messageForm}
+          </StyledP>
+        )}
+
+        {!isValidForm && (
+          <StyledP style={{ color: 'green' }}>
+            {messageForm}
+          </StyledP>
+        )}
+
         <StyledButton type="submit">회원가입</StyledButton>
         {/* <button type="submit" onChange={e => setuserData('')}>회원가입</button> */}
       </StyledForm>

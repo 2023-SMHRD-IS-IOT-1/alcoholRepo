@@ -1,0 +1,61 @@
+.modalPW {
+    display: flex;
+    flex-wrap: wrap;
+    position: fixed;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modalPW-content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    /* 줄 바꿈 허용 */
+    flex: 1;
+    /* 모든 공간을 차지하도록 설정 */
+    justify-content: center;
+    /* 3개의 이미지 너비와 2번의 간격을 합한 값 */
+    /* width: auto;   */
+    background-color: white;
+    border-radius: 10px;
+    width: 350px;
+    height: auto;
+}
+
+.modalPW.open {
+    display: block;
+    background-color: #ffe0e0;
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 450px;
+    margin: 0 auto;
+    position: fixed;    
+    top: 50%; /* 화면 세로 중앙에 배치 */
+    left: 50%; /* 화면 가로 중앙에 배치 */
+    transform: translate(-50%, -50%); /* 정중앙에 배치 */
+}
+
+.modalPW>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.close {
+    margin-top: 10%;
+    padding: 2%;
+    padding-left: 4%;
+    padding-right: 4%;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+    font-size: 15px;
+    background: var(--pink);
+    font-weight: bolder;
+    width: max-content;
+}

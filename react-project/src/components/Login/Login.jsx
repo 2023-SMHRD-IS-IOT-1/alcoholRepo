@@ -61,6 +61,7 @@ const Login = (props) => {
             u_phone : response.data.data[0].u_phone,
             u_birthyear : response.data.data[0].u_birthyear,
             u_gender : response.data.data[0].u_gender,
+            u_img : response.data.data[0].u_img,
             u_nickname : response.data.data[0].u_nickname,
             u_joindate : response.data.data[0].u_joindate,
             u_maxalcohol : response.data.data[0].u_maxalcohol,

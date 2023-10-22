@@ -15,13 +15,14 @@ router.post('/getData', (req, res) => {
   let nickname = req.body[7];
   let maxalcohol = req.body[8];
   let maxtime = req.body[9];
+  let img = req.body[10];
   // let { email, password, name, phoneNumber, birthYear, gender, nickname, joindate} = req.body;
   console.log(phoneNumber);
   console.log(birthYear);
 
-  let sql = "insert into users (u_email, u_pw, u_name, u_phone, u_birthyear, u_gender, u_nickname, u_maxalcohol, u_maxtime) values (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+  let sql = "insert into users (u_email, u_pw, u_name, u_phone, u_birthyear, u_gender, u_nickname, u_maxalcohol, u_maxtime, u_img) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
-  conn.query(sql, [email, password, name, phoneNumber, birthYear, gender, nickname, maxalcohol, maxtime], (err, rows) => {
+  conn.query(sql, [email, password, name, phoneNumber, birthYear, gender, nickname, maxalcohol, maxtime, img], (err, rows) => {
     console.log('회원가입 결과', rows)
     if (rows) {
       console.log('회원가입 성공');
@@ -48,6 +49,25 @@ router.post('/checkemail', (req, res) => {
       res.json({ exists: true });
     } else {
       console.log('사용가능한 이메일입니다.');
+      res.json({ exists: false });
+    }
+  })
+})
+
+// 닉네임 중복확인
+router.post('/checknickname', (req, res) => {
+  console.log('get data', req.body);
+  let nickname = req.body[0];
+  console.log(nickname);
+
+  let sql = "select u_nickname from users where u_nickname = ?"
+  conn.query(sql, [nickname], (err, rows) => {
+    console.log('닉네임 중복 결과', rows)
+    if (rows.length > 0) {
+      console.log('중복된 닉네임이 존재합니다.');
+      res.json({ exists: true });
+    } else {
+      console.log('사용가능한 닉네임입니다.');
       res.json({ exists: false });
     }
   })
@@ -130,7 +150,7 @@ router.post('/FindID', (req, res) => {
 
   conn.query(sql, [name, phoneNumber], (err, rows) => {
     console.log('ID찾기 결과', rows)
-    if (rows) {
+    if (rows.length) {
       console.log('ID찾기 성공')
       res.json({ data: rows })
     } else {
@@ -151,7 +171,7 @@ router.post('/FindPW', (req, res) => {
 
   conn.query(sql, [email, name, phoneNumber], (err, rows) => {
     console.log('PW찾기 결과', rows)
-    if (rows) {
+    if (rows.length) {
       console.log('pW찾기 성공')
       res.json({ data: rows })
     } else {

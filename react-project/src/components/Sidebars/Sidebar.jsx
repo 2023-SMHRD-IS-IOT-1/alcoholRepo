@@ -91,7 +91,7 @@ const Sidebar = () => {
                                     to={`/${item.heading}`}
                                 >
                                     <item.icon />
-                                    <span>
+                                    <span className='sidebaritemname'>
                                         {item.heading}
                                     </span>
                                 </NavLink>

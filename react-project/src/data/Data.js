@@ -36,11 +36,15 @@ export const SidebarData = [
 export const Userinfo = [
 ]
 
-export const UserData = [
+export let UserData = [
 ];
 
+export let UserDataAnalystic = [
+    
+]
+
 // 카드에 표시할 데이터
-export const CardsData = [
+export let CardsData = [
 /*     {
         title : "음주량",
         color : {

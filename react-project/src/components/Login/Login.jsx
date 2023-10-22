@@ -63,7 +63,8 @@ const Login = (props) => {
             u_gender : response.data.data[0].u_gender,
             u_nickname : response.data.data[0].u_nickname,
             u_joindate : response.data.data[0].u_joindate,
-            u_maxalcohol : response.data.data[0].u_maxalcohol
+            u_maxalcohol : response.data.data[0].u_maxalcohol,
+            u_maxtime : response.data.data[0].u_maxtime,
           });
           console.log("유저인포확인", Userinfo);
           navigate('/Main');

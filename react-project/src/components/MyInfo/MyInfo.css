@@ -1,9 +1,9 @@
 .myInfoBox{
     /* display: flex; */
-    justify-content: center;
     /* align-items: center;  */
-    position: fixed;
-    margin-left: 25% ;
+    justify-content: center;
+    /* position: fixed; */
+    margin-left: 10% ;
     margin-top: 10%;
     top: 0;
     left: 0;

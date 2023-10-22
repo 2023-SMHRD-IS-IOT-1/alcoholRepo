@@ -18,7 +18,8 @@ const SignUp = () => {
   const [birthYear, setBirthYear] = useState('선택');
   const [gender, setGender] = useState('선택');
   const [nickname, setNickname] = useState('');
-  const [goal, setGoal] = useState('');
+  const [mount, setMount] = useState('');
+  const [time, setTime] = useState('');
   const navigate = useNavigate();
 
   // email 유효성 확인
@@ -67,10 +68,10 @@ const SignUp = () => {
     e.preventDefault();
     console.log('User Info:', password);
     
-    axios.post('/user/getData', [email, password, confirmPassword, name, phoneNumber, birthYear, gender, nickname, goal])
+    axios.post('/user/getData', [email, password, confirmPassword, name, phoneNumber, birthYear, gender, nickname, mount, time])
       .then(res => {
         console.log('백엔드에서 넘어온 데이터', res.data)
-        navigate('/Login');
+        navigate('/');
       })
       .catch(e => console.log("에러 :", e));
   };
@@ -173,13 +174,38 @@ const SignUp = () => {
         </StyledDiv>
 
         <StyledDiv>
-          <StyledLabel>목표주량(소주 기준) :  </StyledLabel>
-          <select className='signupGoal' value={goal} onChange={(e) => setGoal(e.target.value)}>
+          <StyledLabel>일주일 설정 주량(소주 기준) :  </StyledLabel>
+          <select className='signupGoal' value={mount} onChange={(e) => setMount(e.target.value)}>
             <option value="선택" disabled>선택</option> {/* disabled 속성은 이 옵션을 선택할 수 없도록 합니다. */}
             <option value="180">반병</option>
             <option value="360">1병</option>
             <option value="720">2병</option>
-            <option value="1080">3병 이상</option>
+            <option value="1080">3병</option>
+            <option value="1440">4병</option>
+            <option value="1800">5병</option>
+            <option value="2160">6병</option>
+            <option value="2520">7병</option>
+            <option value="2880">8병</option>
+            <option value="3240">9병</option>
+            <option value="3600">10병</option>
+          </select>
+        </StyledDiv>
+
+        <StyledDiv>
+          <StyledLabel>일주일 설정 시간 :  </StyledLabel>
+          <select className='signupGoal' value={time} onChange={(e) => setTime(e.target.value)}>
+            <option value="선택" disabled>선택</option> {/* disabled 속성은 이 옵션을 선택할 수 없도록 합니다. */}
+            <option value="30">30분</option>
+            <option value="60">1시간</option>
+            <option value="120">2시간</option>
+            <option value="180">3시간</option>
+            <option value="240">4시간</option>
+            <option value="300">5시간</option>
+            <option value="360">6시간</option>
+            <option value="420">7시간</option>
+            <option value="480">8시간</option>
+            <option value="540">9시간</option>
+            <option value="600">10시간</option>
           </select>
         </StyledDiv>
 

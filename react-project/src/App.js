@@ -52,8 +52,8 @@ function App() {
               <Route path="/Main" element={(<Main />)} />
               <Route path="/Calendar" element={(<Calendar />)} />
               <Route path="/Analytics" element={(<Analytics />)} />
-              {/* <Route path="/Login" element={(<LoginPage />)} /> */}
               <Route path="/MyPage" element={(<MyPage />)} />
+              {/* <Route path="/Login" element={(<LoginPage />)} /> */}
             </Routes>
             <Footer />
           </div>

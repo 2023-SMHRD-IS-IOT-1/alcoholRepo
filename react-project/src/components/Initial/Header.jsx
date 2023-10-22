@@ -1,9 +1,10 @@
 import React from 'react'
+import './initial.css'
 
 const Header = () => {
   return (
-    <div>
-      Header
+    <div className='headerinit'>
+      header
     </div>
   )
 }

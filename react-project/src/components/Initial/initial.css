@@ -1,0 +1,13 @@
+.headerinit {
+    background: radial-gradient(circle, #ffd6ff, #bbd0ff);
+    margin-top: 1%;
+    border-radius: 0.7rem;
+    text-align: center;
+}
+
+.footerinit {
+    background: radial-gradient(circle, #ffd6ff, #bbd0ff);
+    margin-top: 1%;
+    border-radius: 0.7rem;
+    text-align: center;
+}

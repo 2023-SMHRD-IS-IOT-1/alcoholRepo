@@ -1,12 +1,12 @@
 .headerinit {
-    background: radial-gradient(circle, #ffd6ff, #bbd0ff);
+    background: radial-gradient(circle, #fae1dd, #e8e8e4);
     margin-top: 1%;
     border-radius: 0.7rem;
     text-align: center;
 }
 
 .footerinit {
-    background: radial-gradient(circle, #ffd6ff, #bbd0ff);
+    background: radial-gradient(circle, #fae1dd, #e8e8e4);
     margin-top: 1%;
     border-radius: 0.7rem;
     text-align: center;

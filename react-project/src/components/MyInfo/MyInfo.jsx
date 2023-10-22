@@ -72,6 +72,7 @@ const MyInfo = () => {
     useEffect(() => {
         setSelectedImg(images[Userinfo[0].u_imgchange])
     }, [Userinfo[0].u_imgchange]);
+    console.log(images[Userinfo[0].u_imgchange]);
 
     const handleImageChange = (imgUrl) => {
         // setSelectedImg(imgUrl);
@@ -84,17 +85,20 @@ const MyInfo = () => {
     const handleConfirmPasswordChange = (e) => {
         setConfirmPassword(e.target.value);
     }
+
+    let passwordcheck = false
     const checkPasswordMatch = () => {
         if (password !== confirmPassword) {
             alert('비밀번호가 일치하지 않습니다.');
         } else {
             alert('비밀번호가 일치합니다.');
+            passwordcheck = true
         }
     }
 
     useEffect(() => {
         setEmail(Userinfo[0].u_email);
-        setPassword(Userinfo[0].u_pw);
+        // setPassword(Userinfo[0].u_pw);
         setName(Userinfo[0].u_name);
         setPhoneNumber(Userinfo[0].u_phone);
         setBirthYear(Userinfo[0].u_birthyear);
@@ -103,12 +107,12 @@ const MyInfo = () => {
         setSelectedImg(Userinfo[0].u_img);
         setGoal(Userinfo[0].u_maxalcohol);
         setTime(Userinfo[0].u_maxtime);
-    }, [])    
+    }, [])
 
     const handleChangeInfo = async (e) => {
         e.preventDefault();
         console.log("정보 변경 시도");
-        if (password === confirmPassword) {
+        if (passwordcheck) {
             try {
                 Userinfo[0].u_img = Userinfo[0].u_imgchange
                 const response = await axios.post('/user/getUpdate', [email, password, name, phoneNumber, birthYear, gender, nickname, goal, time, Userinfo[0].u_img]);
@@ -124,6 +128,7 @@ const MyInfo = () => {
                 // setMessage('에러가 발생했습니다. 다시 시도하세요.');
             }
         } else {
+            alert('비밀번호 확인을 해주세요.');
             console.log("PW 다름");
         }
     }
@@ -213,7 +218,7 @@ const MyInfo = () => {
                     <option value="180">반병</option>
                     <option value="360">1병</option>
                     <option value="720">2병</option>
-                    <option value="1080">3병 이상</option>
+                    <option value="1080">3병</option>
                     <option value="1440">4병</option>
                     <option value="1800">5병</option>
                     <option value="2160">6병</option>

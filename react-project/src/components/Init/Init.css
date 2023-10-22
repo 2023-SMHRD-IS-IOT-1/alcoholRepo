@@ -10,8 +10,12 @@
   left: 0; /* 원하는 위치로 이동 */
 }
 
-.image-containe>img  {
-    width: 1000px;
+.logoimage  {
+    height: 526px;
+
+}
+.loginpage {
+  background: none!important;
 }
 
 .move-message {
@@ -22,4 +26,13 @@
 .initpage {
     display: flex;
     
+}
+
+.transition-fade {
+  opacity: 0;
+  transition: opacity 1s ease; /* 트랜지션을 적용합니다. */
+}
+
+.transition-fade.active {
+  opacity: 1;
 }

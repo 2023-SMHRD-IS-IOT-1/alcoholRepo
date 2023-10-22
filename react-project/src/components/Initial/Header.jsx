@@ -4,7 +4,7 @@ import './initial.css'
 const Header = () => {
   return (
     <div className='headerinit'>
-      header
+      당신의 음주를 위한 선택 : 호온옴술
     </div>
   )
 }

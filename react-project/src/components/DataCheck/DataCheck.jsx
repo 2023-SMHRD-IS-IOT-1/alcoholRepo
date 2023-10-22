@@ -34,9 +34,7 @@ function generateDateRange(days) {
 
 
 const DataCheck = () => {
-    console.log("DataCheck 실행")
     const dateRange = generateDateRange(29);
-    console.log(dateRange);
     useEffect(() => {
         console.log('처음실행');
 

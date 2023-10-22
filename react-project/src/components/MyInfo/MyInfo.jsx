@@ -24,7 +24,7 @@ const MyInfo = () => {
     const [birthYear, setBirthYear] = useState('선택');
     const [gender, setGender] = useState('선택');
     const [nickname, setNickname] = useState('');
-    const [selectedImg, setSelectedImg] = useState('');
+
     const [goal, setGoal] = useState('');
     const [time, setTime] = useState('');
     const [email, setEmail] = useState('');
@@ -35,6 +35,8 @@ const MyInfo = () => {
         donotSticker, fullSticker, pushSticker, soakSticker,
         princessSticker, needSticker, onemoreSticker, waveSticker, bottleSticker
     };
+
+    const [selectedImg, setSelectedImg] = useState(images[Userinfo[0].u_img]);
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -68,10 +70,13 @@ const MyInfo = () => {
     // 프로필사진 변경을 위한 함수 => selectedImage  상태가 변경될 때마다 실행되도록
     useEffect(() => {
         Userinfo[0].u_imgchange = Userinfo[0].u_img
-    }, []);
+        setSelectedImg(images[Userinfo[0].u_imgchange])
+        console.log("기존값", selectedImg);
+    }, [Userinfo[0].u_img]);
     useEffect(() => {
         setSelectedImg(images[Userinfo[0].u_imgchange])
-    }, [Userinfo[0].u_imgchange]);
+        console.log("사진 변경", selectedImg);
+    }, [Userinfo[0].u_imgchange] );
     console.log(images[Userinfo[0].u_imgchange]);
 
     const handleImageChange = (imgUrl) => {
@@ -119,7 +124,7 @@ const MyInfo = () => {
                 if (response.data.exists) {
                     console.log("정보 변경 성공");
                     alert('정보가 성공적으로 변경되었습니다.');
-                    navigate('/');
+                    // navigate('/');
                     // history.back();
                 } else {
                     console.log("정보 변경 실패");

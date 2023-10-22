@@ -1,15 +1,19 @@
-/* 사이드바 전체 css */
-.Sidebar {
+.sidebar {
     display: flex;
     flex-direction: column;
     position: relative;
-    padding-top: 4rem;
+    padding-top: 1rem;
     transition: all 300ms ease;
 }
 
-/* logo div css */
+/* logo */
+.bars {
+    display: none;
+}
+
 .logo {
     display: flex;
+    flex-direction: column;
     height: 5rem;
     font-weight: bold;
     font-size: 22px;
@@ -19,18 +23,48 @@
     height: 4%;
 }
 
-/* logo 이미지 크기 */
-.logoimg {
-    width: 3rem;
-    height: 3rem;
-}
-
-/* logo 옆 글씨 색 */
 .logo>span>span {
     color: var(--pink);
 }
 
-/* 메뉴 */
+.logoimg {
+    width: 10rem;
+    height: 10rem;
+}
+
+.profilebox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid #cfbaf0; /* 원하는 색상과 두께를 설정하세요 */
+    border-radius: 20px; /* 이미지를 동그랗게 만듭니다 */
+    padding: 5px; /* 이미지와 테두리 사이의 간격을 조절하세요 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* 그림자 효과를 추가합니다 */
+}
+
+.proimg {
+    border-radius: 20px;
+    width: 80%;
+    box-shadow: 0 0 20px pink;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.proname {
+    font-family: 'cursive';
+}
+
+.pronick {
+    color: #6dbc53;
+    text-shadow: 2px 2px 4px #d0f4de;
+    font-size: 20px;
+    text-decoration: underline #f1c0e8;
+    border-bottom: 2px solid #f1c0e8;
+}
+
+
+/* menu */
 .menu {
     margin-top: 4rem;
     display: flex;
@@ -38,7 +72,6 @@
     gap: 2rem;
 }
 
-/* 메뉴아이템 정렬 */
 .menuItem {
     display: flex;
     align-items: center;
@@ -47,43 +80,37 @@
     margin-left: 2rem;
     position: relative;
     transition: all 300ms ease;
-    font-size: 14px;
     border-radius: 0.7rem;
+    font-size: 14px;
 }
 
-/* 메뉴에 마우스 가져다 대면 손가락표시 */
 .menuItem:hover {
     cursor: pointer;
 }
 
-/* 메뉴에 마우스 가져다대면 배경 활성화 */
+.menu .menuItem:last-child {
+    position: absolute;
+    bottom: 2.3rem;
+    width: 100%;
+}
+
 .active {
     background: var(--activeItem);
     margin-left: 0;
+
 }
 
-/* 메뉴활성화 배경 왼쪽에 작은 하이라이트 */
 .active::before {
-    content: '';
+    content: "";
     width: 8px;
     height: 100%;
     background: var(--pink);
     margin-right: calc(1rem - 8px);
 }
 
-/* 이거 다시 찾아보기 */
-/* .menu .menuItem:last-child{
-    position: absolute;
-    bottom: 2.3rem;
-    width: 100%;
-} */
 
-.bars {
-    display: none;
-}
-
+/* Tablets */
 @media screen and (max-width: 1200px) {
-
     .menuItem>span {
         display: none;
     }
@@ -91,12 +118,10 @@
     .logo {
         display: none;
     }
-
 }
 
 @media screen and (max-width: 768px) {
-
-    .Sidebar {
+    .sidebar {
         position: fixed;
         z-index: 9;
         background: #ffe0e0;
@@ -122,14 +147,14 @@
         display: flex;
         position: fixed;
         top: 2rem;
-        z-index: 9;
+        left: 60%;
         background: #ffe0e0;
         padding: 10px;
         border-radius: 10px;
+        z-index: 9;
     }
-}
 
-a:-webkit-any-link {
-    color: inherit;
-    text-decoration: none;
+    .close {
+        left: -60%;
+    }
 }

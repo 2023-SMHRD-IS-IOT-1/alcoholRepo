@@ -1,18 +1,43 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import './MainDash.css'
-import { Cards, DataCheck, Table } from '..'
-import sojumain from '../../data/soju.jpg';
-import imgtest from '../../data/fullAlcohol.png'
-import { CardsData1 } from '../../data/Data';
+import { DataCheck } from '..'
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import main1 from '../../imgs/main1.png'
+import main2 from '../../imgs/main2.png'
+import main3 from '../../imgs/main3.png'
+import main4 from '../../imgs/main4.png'
+import main5 from '../../imgs/main5.png'
 
 const MainDash = () => {
-  const imgsrc = imgtest
-  console.log(imgsrc);
+  const images = [main1, main2, main3, main4, main5];
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % images.length);
+    }, 5000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
   return (
     <div className='MainDash'>
-        <h1>나의 음주 관리</h1>
-        <DataCheck />
-        <img src={'./static/media/soju.2a50e17a320caaa79052.jpg'} alt="" />
+      <br />
+      <h1>즐겁고 건강한 술문화</h1>
+      <br />
+      <DataCheck />
+      <div className='imgslide'>
+      <Carousel selectedItem={currentSlide} onChange={(nextSlide) => setCurrentSlide(nextSlide)}>
+        {images.map((image, index) => (
+          <div key={index}>
+            <img src={image} alt={`Image ${index}`} />
+          </div>
+        ))}
+      </Carousel>
+      </div>
+
     </div>
   )
 }

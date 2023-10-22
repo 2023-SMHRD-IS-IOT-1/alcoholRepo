@@ -48,6 +48,12 @@ const MyInfo = () => {
     const closeModal = () => {
         setIsModalOpen(false);
     }
+    // 프로필사진 변경을 위한 함수 => selectedImage  상태가 변경될 때마다 실행되도록
+    useEffect(() => {
+        if (selectedImage) {
+            setProfileImage(selectedImage);
+        }
+    }, [selectedImage]);
 
     // 비밀번호 확인하기
     const handlePasswordChange = (e) => {
@@ -102,11 +108,6 @@ const MyInfo = () => {
                     onClose={closeModal}                
                 />)}
 
-                {/* <img src={profileImage} alt="프로필 사진" id="profile-image" />
-                <input type="file" id="image-upload" onChange={handleImageChange} style={{ display: 'none' }} />
-                <button onClick={() => document.getElementById('image-upload').click()} id="edit-image-btn">
-                    사진 수정
-                </button> */}
             </div>
             <br />
 
@@ -170,9 +171,10 @@ const MyInfo = () => {
                 </select>
 
                 <br/>
-                <label>Alcohol Goal :  </label>
+                <label>Control Your Drinking :  </label>
                 <select className='signupGoal' value={goal} onChange={(e) => setGoal(e.target.value)}>
-                    <option value="선택" disabled>선택</option> {/* disabled 속성은 이 옵션을 선택할 수 없도록 합니다. */}
+                    <option value="선택">{`${(Userinfo[0].u_maxalcohol)/360}`+"병"}</option> 
+                    {/* disabled 속성은 이 옵션을 선택할 수 없도록 함. */}
                     <option value="0.5">반병</option>
                     <option value="1">1병</option>
                     <option value="2">2병</option>

@@ -28,6 +28,11 @@ const MyInfo = () => {
 
     console.log(Userinfo[0].u_img);
 
+    const images = {
+        donotSticker, fullSticker, pushSticker, soakSticker,
+        princessSticker, needSticker, onemoreSticker, waveSticker, bottleSticker
+      };
+
     useEffect(() => {
         const fetchUserData = async () => {
             try {
@@ -59,13 +64,11 @@ const MyInfo = () => {
     }
     // 프로필사진 변경을 위한 함수 => selectedImage  상태가 변경될 때마다 실행되도록
     useEffect(() => {
-        if (selectedImg) {
-            // setSelectedImg(selectedImg);
-        }
-    }, [selectedImg]);
+        setSelectedImg(images[Userinfo[0].u_img])
+    }, [Userinfo[0].u_img]);
 
     const handleImageChange =(imgUrl) => {
-        setSelectedImg(imgUrl);
+        // setSelectedImg(imgUrl);
     }
 
     // 비밀번호 확인하기

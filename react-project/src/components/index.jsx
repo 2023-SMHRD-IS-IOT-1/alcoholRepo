@@ -14,5 +14,7 @@ export { default as MyInfo } from './MyInfo/MyInfo';
 export { default as CalendarApp } from './Calendar/CalendarApp';
 export { default as DataCheck } from './DataCheck/DataCheck';
 export { default as AlcoholReport } from './AlcoholReport/AlcoholReport';
+export { default as AlcoholReportAdd } from './AlcoholReport/AlcoholReportAdd';
 export { default as Table } from './Table/Table';
+export { default as TableAdd } from './Table/TableAdd';
 export { default as Review } from './Review/Review';

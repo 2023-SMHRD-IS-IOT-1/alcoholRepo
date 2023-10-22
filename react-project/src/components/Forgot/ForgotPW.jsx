@@ -17,6 +17,7 @@ const ForgotPW = ({ email, isOpen, onClose }) => {
 
     const navigate = useNavigate();
 
+
     // (2) pw, confirmpw 값이 변경될 때마다 일치 여부 확인 및 업데이트
     useEffect(() => {
         if (changePW && changePWCheck) {
@@ -32,7 +33,6 @@ const ForgotPW = ({ email, isOpen, onClose }) => {
                 const response = await axios.post('/user/ChangePW', [email, changePW, changePWCheck]);
                 if (response.data.exists) {
                     console.log("PW 변경 성공");
-                    console.log("받는 데이터", response.data.data[0].u_pw);
                     alert('비밀번호가 성공적으로 변경되었습니다.');
                     navigate('/');
                     // history.back();

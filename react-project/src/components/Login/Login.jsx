@@ -68,6 +68,7 @@ const Login = (props) => {
             u_maxtime : response.data.data[0].u_maxtime,
           });
           console.log("유저인포확인", Userinfo);
+          alert('로그인 완료!');
           navigate('/Main');
         } else {
           console.log("로그인 실패");

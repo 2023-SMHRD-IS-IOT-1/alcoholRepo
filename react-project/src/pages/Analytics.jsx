@@ -1,5 +1,5 @@
 import React from 'react'
-import { Cards, DataCheck, AlcoholReport } from '../components'
+import { Cards, DataCheck, AlcoholReport, AlcoholReportAdd } from '../components'
 
 const Analytics = () => {
   return (
@@ -7,6 +7,7 @@ const Analytics = () => {
       <DataCheck />
       <Cards />
       <AlcoholReport />
+      <AlcoholReportAdd />
     </div>
   )
 }

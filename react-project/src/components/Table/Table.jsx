@@ -89,7 +89,7 @@ export default function BasicTable() {
     <span>
       일주일간 마신 하루 평균 음주속도는
       <span style={{ color: 'red', fontWeight: 'bold' }}> {CardsData[2].value}</span> 입니다.
-      일주일 설정 음주속도
+      일주일 설정 평균 음주속도
       <span style={{ color: 'red', fontWeight: 'bold' }}> {Math.ceil((Userinfo[0].u_maxalcohol)/(Userinfo[0].u_maxtime/60)*100)/100}ml/h</span> 에 비해
     </span>
   );

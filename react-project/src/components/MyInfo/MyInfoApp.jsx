@@ -1,15 +1,15 @@
-import React from 'react';
-import { ImageProvider } from './ImageContext';
-import MyInfo from './MyInfo';
-import ProfileImg from './ProfileImg';
+// import React from 'react';
+// import { ImageProvider } from './ImageContext';
+// import MyInfo from './MyInfo';
+// import ProfileImg from './ProfileImg';
 
-function App() {
-  return (
-    <ImageProvider>
-      <ProfileImg />
-      <MyInfo />
-    </ImageProvider>
-  );
-}
+// function App() {
+//   return (
+//     <ImageProvider>
+//       <ProfileImg />
+//       <MyInfo />
+//     </ImageProvider>
+//   );
+// }
 
-export default App;
+// export default App;

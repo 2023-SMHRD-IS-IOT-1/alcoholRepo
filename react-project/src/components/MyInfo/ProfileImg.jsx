@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useImage } from './ImageContext';
 import './ProfileImg.css';
 import donotSticker from '../../data/donotAlcohol.png';
 import fullSticker from '../../data/fullAlcohol.png';
@@ -10,24 +9,42 @@ import needSticker from '../../data/needAlcohol.png';
 import onemoreSticker from '../../data/onemoreAlcohol.png';
 import waveSticker from '../../data/waveAlcohol.png';
 import bottleSticker from '../../data/bottleAlcohol.png';
+import { Userinfo } from '../../data/Data';
 
-function ProfileImg({isOpen, onClose}) {
+function ProfileImg({isOpen, onClose, onImageChange}) {
 
+  const images = {
+    donotSticker, fullSticker, pushSticker, soakSticker,
+    princessSticker, needSticker, onemoreSticker, waveSticker, bottleSticker
+  };
   // img클릭시 테두리색 변경하기
   const [selectedImg, setSelectedImg] = useState(null);
-  const { setSelectedImage } = useImage();
-
-  const handleImgClick = (img) => {
-    setSelectedImg(img);
+  
+  const handleImgClick = (imgName) => {
+    const imgUrl = images[imgName];
+    Userinfo[0].u_img = imgName;
+    setSelectedImg(imgName);
+    onImageChange(imgUrl);
   }
+
   const handleCharChangeClick = () => {
-    setSelectedImage(selectedImg);
+    setSelectedImg(selectedImg);
   }
 
   return (
     <div className={`profile ${isOpen ? 'open' : ''}`} onClick={onClose}>
         <div className="profile-content" onClick={e => e.stopPropagation()}>
 
+          {Object.keys(images).map((imgName) => (
+            <img 
+              key={imgName}
+              className={selectedImg === imgName ? 'selected' : ''} 
+              src={images[imgName]} 
+              alt={imgName} 
+              onClick={() => handleImgClick(imgName)}
+            />
+          ))}
+{/* 
                 <img className={selectedImg === 'donotSticker' ? 'selected' : ''} src={donotSticker} alt="금주입니다" onClick={() => handleImgClick('donotSticker')}/>
                 <img className={selectedImg === 'fullSticker' ? 'selected' : ''} src={fullSticker} alt="나 취해써" onClick={() => handleImgClick('fullSticker')}/>
                 <img className={selectedImg === 'pushSticker' ? 'selected' : ''} src={pushSticker} alt="술 드가자~" onClick={() => handleImgClick('pushSticker')}/>
@@ -36,7 +53,7 @@ function ProfileImg({isOpen, onClose}) {
                 <img className={selectedImg === 'princessSticker' ? 'selected' : ''} src={princessSticker} alt="술공주 등장~" onClick={() => handleImgClick('princessSticker')}/>
                 <img className={selectedImg === 'onemoreSticker' ? 'selected' : ''} src={onemoreSticker} alt="한잔만!" onClick={() => handleImgClick('onemoreSticker')}/>
                 <img className={selectedImg === 'waveSticker' ? 'selected' : ''} src={waveSticker} alt="알딸딸" onClick={() => handleImgClick('waveSticker')}/>
-                <img className={selectedImg === 'bottleSticker' ? 'selected' : ''} src={bottleSticker} alt="꼬로로로록~" onClick={() => handleImgClick('bottleSticker')}/>
+                <img className={selectedImg === 'bottleSticker' ? 'selected' : ''} src={bottleSticker} alt="꼬로로로록~" onClick={() => handleImgClick('bottleSticker')}/> */}
 
             </div>    
         <div>

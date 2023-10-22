@@ -2,11 +2,18 @@ import React, { useState, useEffect } from 'react';
 import './MyInfo.css';
 import { Userinfo } from '../../data/Data';
 import ProfileImg from './ProfileImg';
-import { useImage } from './ImageContext';
-
+import donotSticker from '../../data/donotAlcohol.png';
+import fullSticker from '../../data/fullAlcohol.png';
+import pushSticker from '../../data/pushAlcohol.png';
+import soakSticker from '../../data/soakAlcohol.png';
+import princessSticker from '../../data/princessAlcohol.png';
+import needSticker from '../../data/needAlcohol.png';
+import onemoreSticker from '../../data/onemoreAlcohol.png';
+import waveSticker from '../../data/waveAlcohol.png';
+import bottleSticker from '../../data/bottleAlcohol.png';
 
 const MyInfo = () => {
-    const [profileImage, setProfileImage] = useState('');
+    // const [profileImage, setProfileImage] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [name, setName] = useState('');
@@ -14,10 +21,12 @@ const MyInfo = () => {
     const [birthYear, setBirthYear] = useState('선택');
     const [gender, setGender] = useState('선택');
     const [nickname, setNickname] = useState('');
-    const { selectedImage } = useImage();
+    const [selectedImg, setSelectedImg] = useState('');
     const [goal, setGoal] = useState('');
+    const [time, setTime] = useState('');
+    const [email, setEmail] = useState(''); 
 
-    const [email, setEmail] = useState(''); // 초기값은 예시입니다.
+    console.log(Userinfo[0].u_img);
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -50,10 +59,14 @@ const MyInfo = () => {
     }
     // 프로필사진 변경을 위한 함수 => selectedImage  상태가 변경될 때마다 실행되도록
     useEffect(() => {
-        if (selectedImage) {
-            setProfileImage(selectedImage);
+        if (selectedImg) {
+            // setSelectedImg(selectedImg);
         }
-    }, [selectedImage]);
+    }, [selectedImg]);
+
+    const handleImageChange =(imgUrl) => {
+        setSelectedImg(imgUrl);
+    }
 
     // 비밀번호 확인하기
     const handlePasswordChange = (e) => {
@@ -70,42 +83,19 @@ const MyInfo = () => {
         }
     }
 
-    const handleImageChange = async (e) => {
-        const file = e.target.files[0];
-
-        if (!file) return;
-
-        // 예제를 위한 FormData 객체 생성
-        const formData = new FormData();
-        formData.append('profileImage', file);
-
-        // 서버로 이미지 업로드
-        try {
-            const response = await fetch('/upload', { method: 'POST', body: formData });
-            const data = await response.json();
-
-            if (data.imageUrl) {
-                setProfileImage(data.imageUrl); // 서버로부터 받은 이미지 URL로 상태 업데이트
-            } else {
-                alert('이미지 업로드에 실패했습니다.');
-            }
-        } catch (error) {
-            console.error('Error uploading image:', error);
-            alert('이미지 업로드 중 에러가 발생했습니다.');
-        }
-    }
-
     return (
         <div className='myInfoBox'>
             <h2 className='titleInfoBox'>마이페이지</h2>
             <div className="profile-section">
-                {selectedImage && <img src={selectedImage} alt="내 캐릭터" />}  
+                {/* <img src={Userinfo[0].u_img} alt="프로필 이미지" ></img> */}
+                <img src={selectedImg} alt="프로필 이미지" ></img>
                 <button onClick={openModal}>사진 수정</button>
                 
                 {isModalOpen &&
                     (<ProfileImg 
                     isOpen={isModalOpen}
-                    onClose={closeModal}                
+                    onClose={closeModal}    
+                    onImageChange={handleImageChange}            
                 />)}
 
             </div>
@@ -171,14 +161,38 @@ const MyInfo = () => {
                 </select>
 
                 <br/>
-                <label>Control Your Drinking :  </label>
+                <label>일주일 설정 주량(소주 기준) :  </label>
                 <select className='signupGoal' value={goal} onChange={(e) => setGoal(e.target.value)}>
                     <option value="선택">{`${(Userinfo[0].u_maxalcohol)/360}`+"병"}</option> 
                     {/* disabled 속성은 이 옵션을 선택할 수 없도록 함. */}
-                    <option value="0.5">반병</option>
-                    <option value="1">1병</option>
-                    <option value="2">2병</option>
-                    <option value="3">3병 이상</option>
+                    <option value="180">반병</option>
+                    <option value="360">1병</option>
+                    <option value="720">2병</option>
+                    <option value="1080">3병 이상</option>
+                    <option value="1440">4병</option>
+                    <option value="1800">5병</option>
+                    <option value="2160">6병</option>
+                    <option value="2520">7병</option>
+                    <option value="2880">8병</option>
+                    <option value="3240">9병</option>
+                    <option value="3600">10병</option>
+                </select>
+
+                <br/>
+                <label>일주일 설정 시간 :  </label>
+                <select className='signupGoal' value={time} onChange={(e) => setTime(e.target.value)}>
+                    <option value="선택">{`${(Userinfo[0].u_maxtime)/60}`+"시간"}</option> {/* disabled 속성은 이 옵션을 선택할 수 없도록 합니다. */}
+                    <option value="30">30분</option>
+                    <option value="60">1시간</option>
+                    <option value="120">2시간</option>
+                    <option value="180">3시간</option>
+                    <option value="240">4시간</option>
+                    <option value="300">5시간</option>
+                    <option value="360">6시간</option>
+                    <option value="420">7시간</option>
+                    <option value="480">8시간</option>
+                    <option value="540">9시간</option>
+                    <option value="600">10시간</option>
                 </select>
             
             </div>

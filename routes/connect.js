@@ -13,11 +13,12 @@ router.post('/update_weight', (req, res)=>{
 
     conn.query(sql_s, [sagi], (err, rows) => {
         console.log('셀렉트문 :', rows);
-        let soju_g = rows[0].soju_ml;
+        let soju_g = 0;
 
         if (rows.length){
-            // console.log(soju_b);
-            console.log(soju_g);
+            console.log(soju_b);
+            // console.log(soju_g);
+            soju_g = rows[0].soju_ml;
             soju_g += soju_b;
             let sql_u = "update alcohol set soju_ml = ? where u_email = ? and DATE(start_time) = CURDATE()"
             conn.query(sql_u, [soju_g, sagi], (err, rows) => {
@@ -29,23 +30,14 @@ router.post('/update_weight', (req, res)=>{
                 }
             })
         } else {
-            let sql_i = "insert into alcohol  values (?, ?, ?, NOW(), NOW())"
+            soju_g = req.body.weight;
+            console.log(soju_g);
+            let sql_i = "insert into alcohol (u_email, soju_ml, beer_ml, start_time, end_time) values ( ?, ?, ?, NOW(), NOW() )"
             conn.query(sql_i, [sagi, soju_g, 0], (err, rows) => {
                 console.log('인서트문 :', rows);
             })
         }
     })
-    
-    // sql_i = "insert into alcohol (u_email, soju_ml) values (?, ?)"
-    // let saki = "admin@naver.com"
-    // conn.query(sql, [saki, soju_g], (err, rows) => {
-    //     console.log('데이터 전송 결과', rows)
-    //     if (rows) {
-    //       console.log('데이터 전송 성공');
-    //     } else {
-    //       console.log('데이터 전송 실패');
-    //     }
-    // });
 })
 
 

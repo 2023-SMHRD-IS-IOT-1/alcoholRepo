@@ -130,7 +130,7 @@
         height: 100%;
     }
 
-    .sidebaritemname {
+    .menuItem>span {
         display: block;
     }
 

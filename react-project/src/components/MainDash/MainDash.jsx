@@ -16,7 +16,7 @@ const MainDash = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % images.length);
-    }, 5000);
+    }, 3000);
 
     return () => {
       clearInterval(interval);
@@ -24,9 +24,7 @@ const MainDash = () => {
   }, []);
   return (
     <div className='MainDash'>
-      <br />
       <h1>즐겁고 건강한 술문화</h1>
-      <br />
       <DataCheck />
       <div className='imgslide'>
       <Carousel selectedItem={currentSlide} onChange={(nextSlide) => setCurrentSlide(nextSlide)}>

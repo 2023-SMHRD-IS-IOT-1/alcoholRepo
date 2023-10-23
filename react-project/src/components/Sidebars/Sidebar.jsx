@@ -55,14 +55,10 @@ const Sidebar = () => {
 
 
     return (
-        <div>
-            <div
-                className='bars'
-                style={expanded ? { left: '60%' } : { left: '5%' }}
-                onClick={() => setExpanded(!expanded)}
-            >
-                <UilBars />
-            </div>
+        <>
+            <div className="bars" style={expanded ? { left: '60%' } : { left: '5%' }} onClick={() => setExpanded(!expanded)}>
+        <UilBars />
+      </div>
             <motion.div className='Sidebar'
                 variants={sidebarVarients}
                 animate={window.innerWidth <= 768 ? `${expanded}` : ''}
@@ -106,7 +102,7 @@ const Sidebar = () => {
                     </div>
                 </div>
             </motion.div>
-        </div>
+        </>
     )
 }
 

@@ -4,7 +4,7 @@ import './initial.css'
 const Header = () => {
   return (
     <div className='headerinit'>
-      당신의 음주를 위한 선택 : 호온옴술
+      MZ 세대를 위한 음주 분석 서비스
     </div>
   )
 }

@@ -81,7 +81,7 @@ const Login = (props) => {
 
   return (
     <StyledDiv>
-      <StyledH1><StyledSpan>당신의 음주를 위한 선택</StyledSpan>호온옴술</StyledH1>
+      <StyledH1><StyledSpan>당신의 음주를 위한 선택</StyledSpan> 호온옴술</StyledH1>
       <StyledForm onSubmit={handleLogin}>
         <StyledDiv>
           <StyledLabel>

@@ -10,7 +10,7 @@ router.post('/getData', (req, res) => {
   let confirmPassword = req.body[2];
   let name = req.body[3];
   let phoneNumber = req.body[4];
-  let birthYear = parseInt(req.body[5]);
+  let birthYear = req.body[5];
   let gender = req.body[6];
   let nickname = req.body[7];
   let maxalcohol = req.body[8];
@@ -29,7 +29,7 @@ router.post('/getData', (req, res) => {
       res.json({ exists: true });
     } else {
       console.log('회원가입 실패');
-      res.json({ exists: false });
+      // res.json({ exists: false });
     }
   });
 

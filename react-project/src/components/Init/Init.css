@@ -1,5 +1,7 @@
 /* Init.css */
 
+
+
 .image-container {
   position: relative;
   left: 20%; /* 초기 위치 설정 */
@@ -7,7 +9,7 @@
 }
 
 .animate {
-  left: 0; /* 원하는 위치로 이동 */
+  left: 0%; /* 원하는 위치로 이동 */
 }
 
 .logoimage  {
@@ -25,6 +27,8 @@
 
 .initpage {
     display: flex;
+    margin-left : 25%
+    /* justify-content: center; */
     
 }
 

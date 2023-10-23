@@ -32,11 +32,13 @@ function App() {
     return (
       <div className="App">
         <div className="AppUser">
+          <Header />
           <Routes>
             <Route path="/" element={(<InitPage />)} />
             <Route path="/SignUp" element={(<SignUpPage />)} />
             <Route path="/Forgot" element={(<ForgotPage />)} />
           </Routes>
+          <Footer />
         </div>
       </div>
     );

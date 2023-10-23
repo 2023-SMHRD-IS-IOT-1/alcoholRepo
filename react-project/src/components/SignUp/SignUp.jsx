@@ -137,6 +137,7 @@ const SignUp = () => {
     axios.post('/user/getData', [email, password, confirmPassword, name, phoneNumber, birthYear, gender, nickname, mount, time, img])
       .then(res => {
         console.log('백엔드에서 넘어온 데이터', res.data)
+        alert('회원가입 완료!');
         navigate('/');
       })
       .catch(e => console.log("에러 :", e));
